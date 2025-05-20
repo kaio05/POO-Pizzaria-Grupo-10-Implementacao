@@ -24,6 +24,37 @@ public class Cliente {
         setTelefone(telefone);
     }
 
+    public void cadastrar(String nome, String endereco, String cpf, String telefone) {
+        Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
+        if (BancoFake.exists(nome, endereco, cpf, telefone)) {
+            throw new Error("Cliente já cadastrado!");
+        }
+        BancoFake.save(cliente);
+    }
+
+    public void editar(UUID id, String nome, String endereco, String cpf, String telefone) {
+        Cliente cliente = new Cliente(id, nome, endereco, cpf, telefone);
+        if (!BancoFake.exists(id)) {
+            throw new Error("Cliente não existe!");
+        }
+        BancoFake.update(cliente);
+    }
+
+    public void excluir(UUID id) {
+        if (!BancoFake.exists(id)) {
+            throw new Error("Cliente não existe!");
+        }
+        BancoFake.remove(id);
+    }
+    
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -54,39 +85,5 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public void cadastrar(String nome, String endereco, String cpf, String telefone) {
-        Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
-        if (BancoFake.clientes.contains(cliente)) {
-            throw new Error("Cliente já cadastrado!");
-        }
-        BancoFake.clientes.add(cliente);
-    }
-
-    public void editar(UUID id) {
-        Cliente cliente = new Cliente(id, nome, endereco, cpf, telefone);
-        if (!BancoFake.clientes.contains(cliente)) {
-            throw new Error("Cliente não existe!");
-        }
-        int index = BancoFake.clientes.indexOf(cliente);
-        BancoFake.clientes.set(index, cliente);
-    }
-
-    public void excluir(UUID id) {
-        Cliente cliente = new Cliente(id, nome, endereco, cpf, telefone);
-        if (!BancoFake.clientes.contains(cliente)) {
-            throw new Error("Cliente não existe!");
-        }
-        int index = BancoFake.clientes.indexOf(cliente);
-        BancoFake.clientes.remove(index);
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 }
