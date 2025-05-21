@@ -16,8 +16,8 @@ public class Usuario {
         setSenha(senha);
     }
 
-    public Usuario(String nome, String senha) {
-        setNome(nome);
+    public Usuario(String email, String senha) {
+        setEmail(email);
         setSenha(senha);
     }
 
@@ -43,13 +43,13 @@ public class Usuario {
         BancoFake.save(usuario);
     }
     
-    public void login(String nome, String senha) {
-        Usuario usuario = new Usuario(nome, senha);
+    public void login(String email, String senha) {
+        Usuario usuario = new Usuario(email, senha);
         if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
         if (!BancoFake.authenticate(usuario)) {
-            throw new Error("Senha incorreta!");
+            throw new Error("Senha ou email incorretos!");
         }
         System.out.println("Autenticado com sucesso!");
     }

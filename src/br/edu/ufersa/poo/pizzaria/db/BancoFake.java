@@ -27,7 +27,12 @@ public class BancoFake {
     }
     
     public static boolean authenticate(Usuario usuario) {
-        return true;
+        for(Usuario u: usuarios) {
+            if(u.getEmail().equals(usuario.getEmail()) && u.getSenha().equals(usuario.getSenha())) {
+                return true;
+            }
+        }
+        return false;
     } 
 
     public static void save(Usuario usuario) {
