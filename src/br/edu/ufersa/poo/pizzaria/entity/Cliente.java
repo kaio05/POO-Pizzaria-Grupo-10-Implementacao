@@ -26,7 +26,7 @@ public class Cliente {
 
     public void cadastrar(String nome, String endereco, String cpf, String telefone) {
         Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
-        if (BancoFake.exists(nome, endereco, cpf, telefone)) {
+        if (BancoFake.exists(cliente)) {
             throw new Error("Cliente já cadastrado!");
         }
         BancoFake.save(cliente);

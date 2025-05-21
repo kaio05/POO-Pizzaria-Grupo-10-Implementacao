@@ -17,6 +17,11 @@ public class Usuario {
         setSenha(senha);
     }
 
+    public Usuario(String nome, String senha) {
+        setNome(nome);
+        setSenha(senha);
+    }
+
     public Usuario(UUID id, String nome, String email, String senha) {
         setId(id);
         setEmail(email);
@@ -26,17 +31,18 @@ public class Usuario {
 
     public void cadastrar(String nome, String email, String senha) {
         Usuario usuario = new Usuario(nome, email, senha);
-        if (BancoFake.exists(nome)) {
+        if (BancoFake.exists(usuario)) {
             throw new Error("Usuário já cadastrado! Tente fazer login");
         }
         BancoFake.save(usuario);
     }
     
     public void login(String nome, String senha) {
-        if (!BancoFake.exists(nome)) {
+        Usuario usuario = new Usuario(nome, senha);
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
-        if (!BancoFake.authenticate(nome, senha)) {
+        if (!BancoFake.authenticate(usuario)) {
             throw new Error("Senha incorreta!");
         }
         System.out.println("Autenticado com sucesso!");

@@ -13,15 +13,15 @@ public class BancoFake {
         return true;
     }
 
-    public static boolean exists(String nome) {
+    public static boolean exists(Usuario usuario) {
         return true;
     }
 
-    public static boolean exists(String nome, String endereco, String cpf, String telefone) {
+    public static boolean exists(Cliente cliente) {
         return true;
     }
 
-    public static boolean authenticate(String nome, String senha) {
+    public static boolean authenticate(Usuario usuario) {
         return true;
     }
 
