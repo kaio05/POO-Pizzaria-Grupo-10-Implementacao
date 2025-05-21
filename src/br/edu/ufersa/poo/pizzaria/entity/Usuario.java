@@ -60,7 +60,7 @@ public class Usuario {
         if (!BancoFake.exists(id)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
-        BancoFake.remove(id);
+        // BancoFake.remove(id);
     }
 
     public String getNome() {
