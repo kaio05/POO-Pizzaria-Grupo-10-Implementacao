@@ -5,8 +5,9 @@ import br.edu.ufersa.poo.pizzaria.entity.*;;
 
 public class BancoFake {
     public static List<Cliente> clientes = new ArrayList<Cliente>();
-
     public static List<Usuario> usuarios = new ArrayList<Usuario>();
+    public static List<Adicional> adicionais = new ArrayList<>();
+    public static List<TipoPizza> tiposPizza = new ArrayList<>();
 
     public static boolean exists(Usuario usuario) {
         if(usuario.getId() != null) {
@@ -24,6 +25,9 @@ public class BancoFake {
             }
             return false;
         }
+      
+    public static boolean exists(UUID id) {
+        return true;
     }
     
     public static boolean authenticate(Usuario usuario) {
@@ -86,6 +90,15 @@ public class BancoFake {
         System.out.println("Salvo com sucesso!");
     }
 
+    public static void save(Adicional adicional){
+        adicionais.add(adicional);
+        System.out.println("Salvo com sucesso!");
+    }
+
+    public static void save(TipoPizza tp){
+        System.out.println("Salvo com sucesso!");
+    }
+
     public static void update(Cliente cliente) {
         for(Cliente c: clientes) {
             if(c.getId().equals(cliente.getId())) {
@@ -107,5 +120,21 @@ public class BancoFake {
                 return;
             }
         }
+    }
+      
+    public static void update(Adicional adicional){
+        System.out.println("Salvo com sucesso!");
+    }
+
+    public static void update(TipoPizza tp){
+        System.out.println("Salvo com sucesso!");
+    }
+
+    public static void remove(Adicional adicional) {
+        System.out.println("Removido com sucesso!");
+    }
+
+    public static void remove(TipoPizza tp) {
+        System.out.println("Removido com sucesso!");
     }
 }
