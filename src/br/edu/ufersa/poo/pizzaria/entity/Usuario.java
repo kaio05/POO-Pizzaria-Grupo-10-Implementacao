@@ -11,7 +11,6 @@ public class Usuario {
     private String senha;
 
     public Usuario(String nome, String email, String senha) {
-        this.id = UUID.randomUUID();
         setNome(nome);
         setEmail(email);
         setSenha(senha);
@@ -29,11 +28,18 @@ public class Usuario {
         setSenha(senha);
     }
 
+    public Usuario(UUID id) {
+        setId(id);
+    }
+
+    public Usuario() {}
+
     public void cadastrar(String nome, String email, String senha) {
         Usuario usuario = new Usuario(nome, email, senha);
         if (BancoFake.exists(usuario)) {
             throw new Error("Usuário já cadastrado! Tente fazer login");
         }
+        usuario.id = UUID.randomUUID();
         BancoFake.save(usuario);
     }
     
@@ -50,17 +56,18 @@ public class Usuario {
     
     public void editar(UUID id, String nome, String email, String senha) {
         Usuario usuario = new Usuario(id, nome, email, senha);
-        if (!BancoFake.exists(id)) {
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
         BancoFake.update(usuario);
     }
 
     public void excuir(UUID id) {
-        if (!BancoFake.exists(id)) {
+        Usuario usuario = new Usuario(id);
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
-        // BancoFake.remove(id);
+        BancoFake.remove(usuario);
     }
 
     public String getNome() {
