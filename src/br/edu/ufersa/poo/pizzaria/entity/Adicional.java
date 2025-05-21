@@ -9,7 +9,7 @@ public class Adicional {
     private double valor;
 
     // Construtor 
-    private Adicional(String codigo, String nome, double valor) {
+    public Adicional(String codigo, String nome, double valor) {
         this.codigo = codigo;
         this.nome = nome;
         this.valor = valor;
@@ -78,7 +78,7 @@ public class Adicional {
             throw new IllegalArgumentException("Valor deve ser positivo!");
         }
     }
-    
+
     private static void verificarCodigoRepetido(String codigo) {
         for (Adicional adicional : BancoFake.adicionais) {
             if (adicional.codigo.equals(codigo)) {
