@@ -9,6 +9,8 @@ public class BancoFake {
 
     public static List<Usuario> usuarios = new ArrayList<Usuario>();
 
+    public static List<Adicional> adicionais = new ArrayList<>();
+
     public static boolean exists(UUID id) {
         return true;
     }
@@ -33,6 +35,11 @@ public class BancoFake {
         System.out.println("Salvo com sucesso!");
     }
 
+    public static void save(Adicional adicional){
+        adicionais.add(adicional);
+        System.out.println("Salvo com sucesso!");
+    }
+
     public static void update(Cliente cliente) {
         System.out.println("Salvo com sucesso!");
     }
@@ -41,7 +48,15 @@ public class BancoFake {
         System.out.println("Salvo com sucesso!");
     }
 
+    public static void update(Adicional adicional){
+        System.out.println("Salvo com sucesso!");
+    }
+
     public static void remove(UUID id) {
+        System.out.println("Removido com sucesso!");
+    }
+
+    public static void remove(Adicional adicional) {
         System.out.println("Removido com sucesso!");
     }
 }
