@@ -6,15 +6,18 @@ public class TipoPizza {
     private String nome;
     private double valor;
 
+    //  Get e Set nome
     public String getNome(){
         return nome;
     }
+    
     public void setNome(String nome){
         if(nome!= null){
             this.nome = nome;
         }
     }
 
+    //  Get e Set valor
     public double getValor(){
         return valor;
     }
@@ -27,8 +30,8 @@ public class TipoPizza {
 
     // Construtor 
     public TipoPizza(String nome, double valor) {
-        this.nome = nome;
-        this.valor = valor;
+        this.setNome(nome);
+        this.setValor(valor);
     }
 
     // Cadastrar
