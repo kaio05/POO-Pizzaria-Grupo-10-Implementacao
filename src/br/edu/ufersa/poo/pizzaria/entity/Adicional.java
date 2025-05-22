@@ -10,9 +10,9 @@ public class Adicional {
 
     // Construtor 
     public Adicional(String codigo, String nome, double valor) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.valor = valor;
+        this.setCodigo(codigo);
+        this.setNome(nome);
+        this.setValor(valor);
     }
 
     // Cadastrar
@@ -30,15 +30,16 @@ public class Adicional {
     public static void editar(String codigo, String novoNome, double novoValor) {
         validarCampos(codigo, novoNome, novoValor); 
         // Valida os novos dados
-        Adicional adicional = buscarPorCodigo(codigo);
-        // Procura o adicional pelo código
-        if (adicional != null) {
-            adicional.nome = novoNome;
-            adicional.valor = novoValor;
-        } else {
+        for (Adicional adic : BancoFake.adicionais) {
+            if (adic.codigo.equals(codigo)) {
+                adic.nome = novoNome;
+                adic.valor = novoValor;
+                break;
+            }else {
             System.out.println("Adicional não encontrado!");
+            }
         }
-        // Se o adicional existir ele vai editar, caso não retorna mensagem de erro
+        // Se o adicional existir, checo a existencia a partir do codigo, caso o codigo colocado pelo usuario seja igual a algum dos codigos existentes, ele vai editar, caso não retorna mensagem de erro
     }
 
     // Excluir
@@ -87,12 +88,29 @@ public class Adicional {
         }
     }
 
-    //Getters
+    //  Get e Set codigo
+    public void setCodigo(String s){
+        if (s != null){
+            this.codigo = s;
+        }
+    }
     public String getCodigo() { 
         return codigo; 
     }
+    //  Get e Set nome
+    public void setNome(String n){
+        if (n != null){
+            this.nome = n;
+        }
+    }
     public String getNome() { 
         return nome;
+    }
+    //  Get e Set valor
+    public void setValor(double d){
+        if (d > 0){
+            this.valor = d;
+        }
     }
     public double getValor() { 
         return valor;
