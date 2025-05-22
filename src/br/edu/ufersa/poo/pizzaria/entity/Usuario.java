@@ -35,6 +35,8 @@ public class Usuario {
     public Usuario() {}
 
     public void cadastrar(String nome, String email, String senha) {
+        if(!(validarNull(email) && validarNull(senha) && validarNull(nome)))
+            throw new Error("Preencha todos os campos corretamente!");
         Usuario usuario = new Usuario(nome, email, senha);
         if (BancoFake.exists(usuario)) {
             throw new Error("Usuário já cadastrado! Tente fazer login");
@@ -44,6 +46,8 @@ public class Usuario {
     }
     
     public void login(String email, String senha) {
+        if(!(validarNull(email) && validarNull(senha)))
+            throw new Error("Preencha todos os campos corretamente!");
         Usuario usuario = new Usuario(email, senha);
         if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
@@ -75,7 +79,10 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if(nome != "")
+            this.nome = nome;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public String getEmail() {
@@ -83,7 +90,10 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if(email != "")
+            this.email = email;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public String getSenha() {
@@ -91,7 +101,10 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        if(senha != "")
+            this.senha = senha;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public UUID getId() {
@@ -99,7 +112,14 @@ public class Usuario {
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        if(!id.equals(""))
+            this.id = id;
+        else
+            throw new Error("Argumento inválido do tipo UUID!");
+    }
+
+    public boolean validarNull(String campo) {
+        return campo != null;
     }
     
 }
