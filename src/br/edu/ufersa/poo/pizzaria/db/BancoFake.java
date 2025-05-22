@@ -25,9 +25,6 @@ public class BancoFake {
             }
             return false;
         }
-      
-    public static boolean exists(UUID id) {
-        return true;
     }
     
     public static boolean authenticate(Usuario usuario) {
