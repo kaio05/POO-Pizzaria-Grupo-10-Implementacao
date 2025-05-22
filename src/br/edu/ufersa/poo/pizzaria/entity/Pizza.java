@@ -20,15 +20,15 @@ public class Pizza {
         return cliente;
     }
 
-    public void setPizza(Cliente cliente){
+    public void setCliente(Cliente cliente){
         if(cliente != null){
             this.cliente = cliente;
         }
     }
 
     public Pizza(TipoPizza pizza, Cliente cliente){
-        this.pizza = pizza;
-        this.cliente = cliente;
+        setPizza(pizza);
+        setCliente(cliente);
         BancoFake.pizzas.add(this);
     
         

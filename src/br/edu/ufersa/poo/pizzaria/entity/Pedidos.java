@@ -25,7 +25,7 @@ public class Pedidos {
     public Adicional getAdicional(){
         return adicional;
     }
-    public void setCliente(Adicional adicional){
+    public void setAdicional(Adicional adicional){
         if(adicional!=null){
             this.adicional = adicional;
         }
@@ -68,12 +68,12 @@ public class Pedidos {
    }
 
    public Pedidos(Cliente cliente, Adicional adicional, Pizza pizza, Estado estado, Tamanho tamanho, Date data){
-        this.cliente = cliente;
-        this.adicional = adicional;
-        this.pizza = pizza;
-        this.estado = estado;
-        this.tamanho = tamanho;
-        this.data = data;
+        setCliente(cliente);
+        setAdicional(adicional);
+        setPizza(pizza);
+        setEstado(estado);
+        setTamanho(tamanho);
+        setData(data);
    }
 
    public static void cadastrar(Cliente cliente, Adicional adicional, Pizza pizza, String tamanhoStr, String estadoStr, Date data) {
