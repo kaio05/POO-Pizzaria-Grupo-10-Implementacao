@@ -8,6 +8,8 @@ public class BancoFake {
     public static List<Usuario> usuarios = new ArrayList<Usuario>();
     public static List<Adicional> adicionais = new ArrayList<>();
     public static List<TipoPizza> tiposPizza = new ArrayList<>();
+    public static List<Pizza> pizzas = new ArrayList<>();
+    public static List<Pedidos> pedidos = new ArrayList<>();
 
     public static boolean exists(Usuario usuario) {
         if(usuario.getId() != null) {

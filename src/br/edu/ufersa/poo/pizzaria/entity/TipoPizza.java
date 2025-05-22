@@ -6,6 +6,25 @@ public class TipoPizza {
     private String nome;
     private double valor;
 
+    public String getNome(){
+        return nome;
+    }
+    public void setNome(String nome){
+        if(nome!= null){
+            this.nome = nome;
+        }
+    }
+
+    public double getValor(){
+        return valor;
+    }
+
+    public void setValor(double valor){
+        if(valor > 0){
+            this.valor = valor;
+        }
+    }
+
     // Construtor 
     public TipoPizza(String nome, double valor) {
         this.nome = nome;
