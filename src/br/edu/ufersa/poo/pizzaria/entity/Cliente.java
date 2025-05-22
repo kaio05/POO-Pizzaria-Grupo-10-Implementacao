@@ -28,6 +28,8 @@ public class Cliente {
     public Cliente() {}
 
     public void cadastrar(String nome, String endereco, String cpf, String telefone) {
+        if(!(validarNull(nome) && validarNull(endereco) && validarNull(cpf) && validarNull(telefone)))
+            throw new Error("Preencha todos os campos corretamente!");
         Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
         if (BancoFake.exists(cliente)) {
             throw new Error("Cliente já cadastrado!");
@@ -57,7 +59,10 @@ public class Cliente {
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        if(!id.equals(""))
+            this.id = id;
+        else
+            throw new Error("Argumento inválido do tipo UUID!");
     }
 
     public String getNome() {
@@ -65,7 +70,10 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if(nome != "")
+            this.nome = nome;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public String getEndereco() {
@@ -73,7 +81,10 @@ public class Cliente {
     }
 
     public void setEndereco(String endereco) {
-        this.endereco = endereco;
+        if(endereco != "")
+            this.endereco = endereco;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public String getCpf() {
@@ -81,7 +92,10 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if(cpf != "")
+            this.cpf = cpf;
+        else
+            throw new Error("Argumento inválido do tipo String!");
     }
 
     public String getTelefone() {
@@ -89,6 +103,13 @@ public class Cliente {
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        if(telefone != "")
+            this.telefone = telefone;
+        else
+            throw new Error("Argumento inválido do tipo String!");
+    }
+
+    public boolean validarNull(String campo) {
+        return campo != null;
     }
 }
