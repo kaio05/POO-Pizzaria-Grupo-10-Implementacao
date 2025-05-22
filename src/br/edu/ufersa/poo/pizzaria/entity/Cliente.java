@@ -1,7 +1,5 @@
 package br.edu.ufersa.poo.pizzaria.entity;
-
 import java.util.UUID;
-
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
 
 public class Cliente {
@@ -9,7 +7,6 @@ public class Cliente {
     private String nome, endereco, cpf, telefone;
 
     public Cliente(String nome, String endereco, String cpf, String telefone) {
-        this.id = UUID.randomUUID();
         setNome(nome);
         setEndereco(endereco);
         setCpf(cpf);
@@ -24,27 +21,35 @@ public class Cliente {
         setTelefone(telefone);
     }
 
+    public Cliente(UUID id) {
+        setId(id);
+    }
+
+    public Cliente() {}
+
     public void cadastrar(String nome, String endereco, String cpf, String telefone) {
         Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
-        if (BancoFake.exists(nome, endereco, cpf, telefone)) {
+        if (BancoFake.exists(cliente)) {
             throw new Error("Cliente já cadastrado!");
         }
+        cliente.id = UUID.randomUUID();
         BancoFake.save(cliente);
     }
 
     public void editar(UUID id, String nome, String endereco, String cpf, String telefone) {
         Cliente cliente = new Cliente(id, nome, endereco, cpf, telefone);
-        if (!BancoFake.exists(id)) {
+        if (!BancoFake.exists(cliente)) {
             throw new Error("Cliente não existe!");
         }
         BancoFake.update(cliente);
     }
 
     public void excluir(UUID id) {
-        if (!BancoFake.exists(id)) {
+        Cliente cliente = new Cliente(id);
+        if (!BancoFake.exists(cliente)) {
             throw new Error("Cliente não existe!");
         }
-        BancoFake.remove(id);
+        BancoFake.remove(cliente);
     }
     
     public UUID getId() {

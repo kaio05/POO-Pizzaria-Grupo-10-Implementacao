@@ -11,8 +11,12 @@ public class Usuario {
     private String senha;
 
     public Usuario(String nome, String email, String senha) {
-        this.id = UUID.randomUUID();
         setNome(nome);
+        setEmail(email);
+        setSenha(senha);
+    }
+
+    public Usuario(String email, String senha) {
         setEmail(email);
         setSenha(senha);
     }
@@ -24,37 +28,46 @@ public class Usuario {
         setSenha(senha);
     }
 
+    public Usuario(UUID id) {
+        setId(id);
+    }
+
+    public Usuario() {}
+
     public void cadastrar(String nome, String email, String senha) {
         Usuario usuario = new Usuario(nome, email, senha);
-        if (BancoFake.exists(nome)) {
+        if (BancoFake.exists(usuario)) {
             throw new Error("Usuário já cadastrado! Tente fazer login");
         }
+        usuario.id = UUID.randomUUID();
         BancoFake.save(usuario);
     }
     
-    public void login(String nome, String senha) {
-        if (!BancoFake.exists(nome)) {
+    public void login(String email, String senha) {
+        Usuario usuario = new Usuario(email, senha);
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
-        if (!BancoFake.authenticate(nome, senha)) {
-            throw new Error("Senha incorreta!");
+        if (!BancoFake.authenticate(usuario)) {
+            throw new Error("Senha ou email incorretos!");
         }
         System.out.println("Autenticado com sucesso!");
     }
     
     public void editar(UUID id, String nome, String email, String senha) {
         Usuario usuario = new Usuario(id, nome, email, senha);
-        if (!BancoFake.exists(id)) {
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
         BancoFake.update(usuario);
     }
 
     public void excuir(UUID id) {
-        if (!BancoFake.exists(id)) {
+        Usuario usuario = new Usuario(id);
+        if (!BancoFake.exists(usuario)) {
             throw new Error("Usuário não cadastrado! Cadastre-se!");
         }
-        BancoFake.remove(id);
+        BancoFake.remove(usuario);
     }
 
     public String getNome() {
