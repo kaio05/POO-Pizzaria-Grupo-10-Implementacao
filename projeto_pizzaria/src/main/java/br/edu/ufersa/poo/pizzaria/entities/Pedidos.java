@@ -1,4 +1,4 @@
-package br.edu.ufersa.poo.pizzaria.entity;
+package br.edu.ufersa.poo.pizzaria.entities;
 import java.sql.Date;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
