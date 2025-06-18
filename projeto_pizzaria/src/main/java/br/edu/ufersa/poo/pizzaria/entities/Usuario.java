@@ -3,75 +3,31 @@ package br.edu.ufersa.poo.pizzaria.entities;
 import java.util.UUID;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String senha;
-
-    public Usuario(String nome, String email, String senha) {
-        setNome(nome);
-        setEmail(email);
-        setSenha(senha);
-    }
-
-    public Usuario(String email, String senha) {
-        setEmail(email);
-        setSenha(senha);
-    }
-
-    public Usuario(UUID id, String nome, String email, String senha) {
-        setId(id);
-        setEmail(email);
-        setNome(nome);
-        setSenha(senha);
-    }
-
-    public Usuario(UUID id) {
-        setId(id);
-    }
 
     public Usuario() {}
 
-    public void cadastrar(String nome, String email, String senha) {
-        if(!(validarNull(email) && validarNull(senha) && validarNull(nome)))
-            throw new Error("Preencha todos os campos corretamente!");
-        Usuario usuario = new Usuario(nome, email, senha);
-        if (BancoFake.exists(usuario)) {
-            throw new Error("Usuário já cadastrado! Tente fazer login");
-        }
-        usuario.id = UUID.randomUUID();
-        BancoFake.save(usuario);
-    }
-    
-    public void login(String email, String senha) {
-        if(!(validarNull(email) && validarNull(senha)))
-            throw new Error("Preencha todos os campos corretamente!");
-        Usuario usuario = new Usuario(email, senha);
-        if (!BancoFake.exists(usuario)) {
-            throw new Error("Usuário não cadastrado! Cadastre-se!");
-        }
-        if (!BancoFake.authenticate(usuario)) {
-            throw new Error("Senha ou email incorretos!");
-        }
-        System.out.println("Autenticado com sucesso!");
-    }
-    
-    public void editar(UUID id, String nome, String email, String senha) {
-        Usuario usuario = new Usuario(id, nome, email, senha);
-        if (!BancoFake.exists(usuario)) {
-            throw new Error("Usuário não cadastrado! Cadastre-se!");
-        }
-        BancoFake.update(usuario);
-    }
+    public Usuario(String nome, String email, String senha) {}
 
-    public void excuir(UUID id) {
-        Usuario usuario = new Usuario(id);
-        if (!BancoFake.exists(usuario)) {
-            throw new Error("Usuário não cadastrado! Cadastre-se!");
-        }
-        BancoFake.remove(usuario);
+    public UUID getId() {
+        return id;
     }
 
     public String getNome() {
@@ -79,10 +35,10 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        if(nome != "")
-            this.nome = nome;
+        if(nome == null || nome.isEmpty())
+            System.out.println("Nome não pode ser vazio");
         else
-            throw new Error("Argumento inválido do tipo String!");
+            this.nome = nome;
     }
 
     public String getEmail() {
@@ -90,10 +46,10 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        if(email != "")
-            this.email = email;
+        if(email == null || email.isEmpty())
+            System.out.println("Email não pode ser vazio");
         else
-            throw new Error("Argumento inválido do tipo String!");
+            this.email = email;
     }
 
     public String getSenha() {
@@ -101,25 +57,9 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        if(senha != "")
+        if(senha == null || senha.isEmpty())
+            System.out.println("Senha não pode ser vazio");
+        else
             this.senha = senha;
-        else
-            throw new Error("Argumento inválido do tipo String!");
     }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        if(!id.equals(""))
-            this.id = id;
-        else
-            throw new Error("Argumento inválido do tipo UUID!");
-    }
-
-    public boolean validarNull(String campo) {
-        return campo != null;
-    }
-    
 }
