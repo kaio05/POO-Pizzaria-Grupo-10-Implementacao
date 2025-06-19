@@ -24,7 +24,11 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(String nome, String email, String senha) {}
+    public Usuario(String nome, String email, String senha) {
+        setNome(nome);
+        setEmail(email);
+        setSenha(senha);
+    }
 
     public UUID getId() {
         return id;
@@ -61,5 +65,14 @@ public class Usuario {
             System.out.println("Senha não pode ser vazio");
         else
             this.senha = senha;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
