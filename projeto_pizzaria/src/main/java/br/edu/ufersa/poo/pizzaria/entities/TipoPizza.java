@@ -1,6 +1,11 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import java.util.UUID;
 
 public class TipoPizza {
     private String nome;
