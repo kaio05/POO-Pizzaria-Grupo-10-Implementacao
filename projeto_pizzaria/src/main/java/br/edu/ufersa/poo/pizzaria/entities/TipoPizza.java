@@ -1,6 +1,7 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -8,55 +9,42 @@ import jakarta.persistence.Id;
 import java.util.UUID;
 
 public class TipoPizza {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
     private String nome;
+
+    @Column(nullable = false)
     private double valor;
 
+    //  Get Id
+    public UUID getId() {
+        return id;
+    }
     //  Get e Set nome
     public String getNome(){
         return nome;
     }
-    
     public void setNome(String nome){
         if(nome!= null){
             this.nome = nome;
         }
     }
-
     //  Get e Set valor
     public double getValor(){
         return valor;
     }
-
     public void setValor(double valor){
         if(valor > 0){
             this.valor = valor;
         }
     }
-
-    // Construtor 
+    // Construtor
+    public TipoPizza(){}
     public TipoPizza(String nome, double valor) {
-        this.setNome(nome);
-        this.setValor(valor);
-    }
-
-    // Cadastrar
-    public static void cadastrar(String nome, double valor) {
-        BancoFake.tiposPizza.add(new TipoPizza(nome, valor));
-    }
-
-    // Editar
-    public static void editar(String nomeAntigo, String novoNome, double novoValor) {
-        for (TipoPizza tipo : BancoFake.tiposPizza) {
-            if (tipo.nome.equals(nomeAntigo)) {
-                tipo.nome = novoNome;
-                tipo.valor = novoValor;
-                break;
-            }
-        }
-    }
-
-    // Excluir
-    public static void excluir(String nome) {
-        BancoFake.tiposPizza.removeIf(tipo -> tipo.nome.equals(nome));
+        this.nome = nome;
+        this.valor = valor;
     }
 }
