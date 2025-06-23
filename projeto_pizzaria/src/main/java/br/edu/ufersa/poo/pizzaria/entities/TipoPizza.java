@@ -1,17 +1,27 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
+@Entity
+@Table(name = "tipos_pizza")
 public class TipoPizza {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String codigo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -43,8 +53,19 @@ public class TipoPizza {
     }
     // Construtor
     public TipoPizza(){}
-    public TipoPizza(String nome, double valor) {
-        this.nome = nome;
-        this.valor = valor;
+    public TipoPizza(String codigo, String nome, double valor) {
+        setCodigo(codigo);
+        setNome(nome);
+        setValor(valor);
+    }
+
+    @Override
+    public String toString() {
+        return "TipoPizza{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                '}';
     }
 }

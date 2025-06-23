@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Adicional")
+@Table(name = "adicionais")
 public class Adicional {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -16,7 +15,7 @@ public class Adicional {
     @Column(nullable = false, unique = true)
     private String codigo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     @Column(nullable = false)
@@ -24,10 +23,21 @@ public class Adicional {
 
     // Construtor
     public Adicional(){}
+
+    @Override
+    public String toString() {
+        return "Adicional{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                '}';
+    }
+
     public Adicional(String codigo, String nome, double valor) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.valor = valor;
+        setCodigo(codigo);
+        setNome(nome);
+        setValor(valor);
     }
 
     //  Get e Set codigo

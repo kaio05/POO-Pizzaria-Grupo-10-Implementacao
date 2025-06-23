@@ -13,20 +13,14 @@ public class AdicionalRepositoryImpl extends RepositoryImpl<Adicional> implement
         super(entityClass, em);
     }
 
-    public Adicional findByCpf(String cod) {
-        TypedQuery<Adicional> query = em.createQuery("from Adicional where cod = :cod", Adicional.class);
-        query.setParameter("cod", cod);
-        return query.getResultStream().findFirst().orElse(null);
-    }
-
     public List<Adicional> findAll() {
-        return em.createQuery("from Cliente", Adicional.class).getResultList();
+        return em.createQuery("from Adicional", Adicional.class).getResultList();
     }
 
     @Override
-    public Adicional findByCod(String cod) {
-        TypedQuery<Adicional> query = em.createQuery("From Adicional where cod = :cod", Adicional.class);
-        query.setParameter("Cod", cod);
+    public Adicional findByCode(String code) {
+        TypedQuery<Adicional> query = em.createQuery("From Adicional where codigo = :code", Adicional.class);
+        query.setParameter("code", code);
         return query.getResultStream().findFirst().orElse(null);
     }
 }

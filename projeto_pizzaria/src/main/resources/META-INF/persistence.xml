@@ -9,6 +9,8 @@
 
         <class>br.edu.ufersa.poo.pizzaria.entities.Usuario</class>
         <class>br.edu.ufersa.poo.pizzaria.entities.Cliente</class>
+        <class>br.edu.ufersa.poo.pizzaria.entities.Adicional</class>
+        <class>br.edu.ufersa.poo.pizzaria.entities.TipoPizza</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

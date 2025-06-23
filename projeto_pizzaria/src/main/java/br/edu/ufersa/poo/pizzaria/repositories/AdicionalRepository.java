@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AdicionalRepository extends Repository<Adicional>{
-    Adicional findByCod(String cod);
+    Adicional findByCode(String code);
 }
