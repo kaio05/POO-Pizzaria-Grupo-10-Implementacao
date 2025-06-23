@@ -5,30 +5,30 @@ import java.util.ArrayList;
 import br.edu.ufersa.poo.pizzaria.entity.*;;
 
 public class BancoFake {
+
+    // Listas de array
     public static List<Cliente> clientes = new ArrayList<Cliente>();
-
     public static List<Usuario> usuarios = new ArrayList<Usuario>();
-
     public static List<Adicional> adicionais = new ArrayList<>();
-
     public static List<TipoPizza> tiposPizza = new ArrayList<>();
 
+    //  Exists
     public static boolean exists(UUID id) {
         return true;
     }
-
     public static boolean exists(String nome) {
         return true;
     }
-
     public static boolean exists(String nome, String endereco, String cpf, String telefone) {
         return true;
     }
 
+    //  Authenticate
     public static boolean authenticate(String nome, String senha) {
         return true;
     }
 
+    //  Save
     public static void save(Cliente cliente) {
         System.out.println("Salvo com sucesso!");
     }
