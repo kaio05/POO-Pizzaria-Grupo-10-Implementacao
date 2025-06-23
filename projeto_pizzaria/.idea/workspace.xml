@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Estado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2yeMUJ7B1jvWj7h7p6U2iV6X4KG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/UFERSA/poo/projeto_pizzaria",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="" />
+      <created>1750190599990</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750190599990</updated>
+      <workItem from="1750190601163" duration="78000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
