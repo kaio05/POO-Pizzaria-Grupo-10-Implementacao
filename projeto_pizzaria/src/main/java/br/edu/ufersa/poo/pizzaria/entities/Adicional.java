@@ -112,7 +112,13 @@ public class Adicional {
             this.valor = d;
         }
     }
-    public double getValor() { 
-        return valor;
+    public double getValor() {return valor;}
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
