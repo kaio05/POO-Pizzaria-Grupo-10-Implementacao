@@ -1,58 +1,38 @@
 package br.edu.ufersa.poo.pizzaria.repositories;
 
+import br.edu.ufersa.poo.pizzaria.entities.Adicional;
+import br.edu.ufersa.poo.pizzaria.entities.Pizza;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
 import java.util.List;
 import java.util.UUID;
 
-public abstract class RepositoryImpl<Pizza> implements Repository<Pizza> {
+public class PizzaRepositoryImpl extends RepositoryImpl<Pizza> implements PizzaRepository {
 
-    protected final EntityManager em;
-    private final Class<Pizza> entityClass;
-
-    public RepositoryImpl(Class<T> entityClass, EntityManager em) {
-        this.entityClass = entityClass;
-        this.em = em;
+    public PizzaRepositoryImpl(Class<Pizza> entityClass, EntityManager em) {
+        super(entityClass, em);
     }
 
     @Override
-    public T findById(UUID id) {
-        return em.find(entityClass, id);
-    }
-
-    @Override
-    public List<T> findAll() {
-        return em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass)
+    public List<Pizza> findAll() {
+        return em.createQuery(
+                "from Pizza", Pizza.class)
                 .getResultList();
     }
 
     @Override
-    public void save(T t) {
-        EntityTransaction ts = em.getTransaction();
-        try {
-            ts.begin();
-            em.persist(t);
-            ts.commit();
-        } catch (RuntimeException e) {
-            if (ts.isActive()) ts.rollback();
-            throw new RuntimeException("Erro ao salvar entidade", e);
-        }
+    public List<Pizza> findByClienteId(UUID clienteId) {
+        TypedQuery<Pizza> query = em.createQuery("From Pizza where cliente = :clienteId", Pizza.class);
+        query.setParameter("clienteId", clienteId);
+        return query.getResultList();
     }
 
     @Override
-    public T update(T t) {
-        EntityTransaction ts = em.getTransaction();
-        ts.begin();
-        T merged = em.merge(t);
-        ts.commit();
-        return merged;
-    }
-
-    @Override
-    public void delete(T t) {
-        EntityTransaction ts = em.getTransaction();
-        ts.begin();
-        em.remove(em.contains(t) ? t : em.merge(t));
-        ts.commit();
+    public List<Pizza> findByType(UUID tipoId) {
+        TypedQuery<Pizza> query = em.createQuery("From Pizza where tipo = :tipoId", Pizza.class);
+        query.setParameter("tipoId", tipoId);
+        return query.getResultList();
     }
 }
