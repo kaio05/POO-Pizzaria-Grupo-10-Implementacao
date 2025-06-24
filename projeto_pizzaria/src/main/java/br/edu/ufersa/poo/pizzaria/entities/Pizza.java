@@ -1,9 +1,15 @@
 package br.edu.ufersa.poo.pizzaria.entities;
+import jakarta.persistence.*;
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
-
+@Entity
+@Table(name="pizza");
 public class Pizza {
+    @ManyToOne
+    @JoinColumns(name = "tipos_pizza", nullable = false)
     private TipoPizza pizza;
+    @ManyToOne
+    @JoinColumns(name = "clientes", nullable = false)
     private Cliente cliente;
 
     public TipoPizza getPizza(){
@@ -14,6 +20,8 @@ public class Pizza {
     public void setPizza(TipoPizza pizza){
         if(pizza!=null){
             this.pizza = pizza;
+        }else{
+            System.out.println("Pizza não encontrada");
         }
     }
 
@@ -24,6 +32,8 @@ public class Pizza {
     public void setCliente(Cliente cliente){
         if(cliente != null){
             this.cliente = cliente;
+        }else {
+            System.out.println("Cliente não encontrado");
         }
     }
 
@@ -35,17 +45,6 @@ public class Pizza {
         
     }
 
-    public Pizza buscarPizza(TipoPizza tipo, Cliente c){
-        for(Pizza p : BancoFake.pizzas){
-            if(p.getPizza().getNome().equals(pizza.getNome()) && p.getCliente().getNome().equals(cliente.getNome())){
-                return p;
-            }
-        else{
-            System.out.println("Não encontrado!");
-        }
-        }
-        return new Pizza(tipo, cliente);
-    }
-
+   public Pizza(){}
 
 }

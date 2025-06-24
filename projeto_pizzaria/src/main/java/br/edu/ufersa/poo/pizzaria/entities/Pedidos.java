@@ -14,11 +14,14 @@ public class Pedidos {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     public class Pedidos(){}
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name="clientes",nullable = false)
     private Cliente cliente;
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name="adicionais",nullable = false)
     private Adicional adicional;
-    Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name="clientes",nullable = false)
     private Pizza pizza;
     Column(nullable = false)
     private Estado estado;
