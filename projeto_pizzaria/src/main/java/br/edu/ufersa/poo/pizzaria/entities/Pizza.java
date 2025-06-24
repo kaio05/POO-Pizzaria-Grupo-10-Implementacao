@@ -6,10 +6,10 @@ import br.edu.ufersa.poo.pizzaria.db.BancoFake;
 @Table(name="pizza");
 public class Pizza {
     @ManyToOne
-    @JoinColumns(name = "tipos_pizza", nullable = false)
+    @JoinColumns(name = "tipo_pizza_id", nullable = false)
     private TipoPizza pizza;
     @ManyToOne
-    @JoinColumns(name = "clientes", nullable = false)
+    @JoinColumns(name = "clientes_id", nullable = false)
     private Cliente cliente;
 
     public TipoPizza getPizza(){

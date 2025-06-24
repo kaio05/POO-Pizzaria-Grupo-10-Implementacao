@@ -21,7 +21,7 @@ public class Pedidos {
     @JoinColumn(name="adicionais",nullable = false)
     private Adicional adicional;
     @ManyToOne
-    @JoinColumn(name="clientes",nullable = false)
+    @JoinColumn(name="pizza",nullable = false)
     private Pizza pizza;
     Column(nullable = false)
     private Estado estado;
