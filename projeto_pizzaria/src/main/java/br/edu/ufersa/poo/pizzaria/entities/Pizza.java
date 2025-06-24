@@ -7,6 +7,7 @@ public class Pizza {
     private Cliente cliente;
 
     public TipoPizza getPizza(){
+
         return pizza;
     }
 

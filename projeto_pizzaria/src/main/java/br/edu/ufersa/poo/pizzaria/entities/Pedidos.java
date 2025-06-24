@@ -1,16 +1,30 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 import java.sql.Date;
+import java.util.UUID;
+import jakarta.persistence.*
 
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
 
 
+@Entity
+@Table(name = "Pedidos")
 
 public class Pedidos {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    public class Pedidos(){}
+    @Column(nullable = false)
     private Cliente cliente;
+    @Column(nullable = false)
     private Adicional adicional;
+    Column(nullable = false)
     private Pizza pizza;
+    Column(nullable = false)
     private Estado estado;
+    Column(nullable = false)
     private Tamanho tamanho;
+    Column(nullable = false)
     private Date data;
 
     public Cliente getCliente(){
@@ -19,6 +33,8 @@ public class Pedidos {
     public void setCliente(Cliente cliente){
         if(cliente!=null){
             this.cliente = cliente;
+        }else{
+            System.out.println("Cliente não encontrado");
         }
     }
 
@@ -28,6 +44,8 @@ public class Pedidos {
     public void setAdicional(Adicional adicional){
         if(adicional!=null){
             this.adicional = adicional;
+        }else{
+            System.out.println("Adicional não encontrado");
         }
     }
 
@@ -37,6 +55,8 @@ public class Pedidos {
     public void setPizza(Pizza pizza){
         if(pizza!=null){
             this.pizza = pizza;
+        }else{
+            System.out.println("Pizza não encontrada");
         }
     }
 
@@ -46,7 +66,9 @@ public class Pedidos {
     public void setEstado(Estado estado){
         if(estado!=null){
         this.estado = estado;
-    }
+    }else{
+            System.out.println("Estado não encontrado");
+        }
    }
 
    public Tamanho getTamanho(){
@@ -55,6 +77,8 @@ public class Pedidos {
    public void setTamanho(Tamanho tamanho){
     if(tamanho!=null){
         this.tamanho = tamanho;
+    }else{
+        System.out.println("Tamanho não encontrado");
     }
    }
 
@@ -64,6 +88,8 @@ public class Pedidos {
    public void setData(Date data){
         if(data!=null){
             this.data = data;
+        }else{
+            System.out.println("Data não encontrada");
         }
    }
 
@@ -76,50 +102,17 @@ public class Pedidos {
         setData(data);
    }
 
-   public static void cadastrar(Cliente cliente, Adicional adicional, Pizza pizza, String tamanhoStr, String estadoStr, Date data) {
-        Tamanho tamanho = Tamanho.valueOf(tamanhoStr.toUpperCase());
-        Estado estado = Estado.valueOf(estadoStr.toUpperCase());
-        Pedidos pedido = new Pedidos(cliente, adicional, pizza, estado, tamanho, data);
-        BancoFake.pedidos.add(pedido);
+   public String toString(){
+        return "Pedido: " +
+                "Cliente= "+"|"+
+                "Adicional= "+"|"+
+                "Pizza= "+"|"+
+                "Estado= "+"|"+
+                "Tamanho= "+"|"+
+                "Data= ";
    }
 
-     public static void editar(Cliente cliente, Adicional adicional, Pizza pizza, String tamanhoStr, String estadoStr) {
-        for (Pedidos p : BancoFake.pedidos) {
-            if (p.cliente.getNome().equals(cliente.getNome()) && p.pizza.equals(pizza)) {
-                p.adicional = adicional;
-                p.tamanho = Tamanho.valueOf(tamanhoStr.toUpperCase());
-                p.estado = Estado.valueOf(estadoStr.toUpperCase());
-                p.data = new Date(0);
-                break;
-            }
-        }
-    }
 
-    public static void excluir(String nomeCliente) {
-        BancoFake.pedidos.removeIf(p -> p.cliente.getNome().equals(nomeCliente));
-    }
 
-   public static Pedidos buscar(Cliente cliente, Pizza pizza, String estadoStr) {
-        Estado estado = Estado.valueOf(estadoStr.toUpperCase());
-        for (Pedidos p : BancoFake.pedidos) {
-            if (p.cliente.getNome().equals(cliente.getNome()) &&
-                p.pizza.equals(pizza) &&
-                p.estado == estado) {
-                return p;
-            }
-        }
-        return new Pedidos(cliente, null, pizza, estado, null, null);
-    }
 
-     public static void gerarRelatorio(Cliente cliente, Pizza pizza) {
-        System.out.println("Relatório de pedidos do cliente: " + cliente.getNome());
-        for (Pedidos p : BancoFake.pedidos) {
-            if (p.cliente.equals(cliente) && p.pizza.equals(pizza)) {
-                System.out.println("Data: " + p.data +
-                                   ", Adicional: " + p.adicional +
-                                   ", Tamanho: " + p.tamanho +
-                                   ", Estado: " + p.estado);
-            }
-        }
-    }
 }
