@@ -46,19 +46,15 @@ public class Pedido {
         if(cliente!=null){
             this.cliente = cliente;
         }else{
-            System.out.println("Cliente não encontrado");
+            System.out.println("Cliente não pode ser nulo");
         }
     }
 
-    public Adicional getAdicional(){
-        return adicional;
+    public List<Adicional> getAdicional(){
+        return this.adicionais;
     }
-    public void setAdicional(Adicional adicional){
-        if(adicional!=null){
-            this.adicional = adicional;
-        }else{
-            System.out.println("Adicional não encontrado");
-        }
+    public void setAdicionais(List<Adicional> adicionais){
+        this.adicionais = adicionais;
     }
 
     public Pizza getPizza(){
@@ -68,7 +64,7 @@ public class Pedido {
         if(pizza!=null){
             this.pizza = pizza;
         }else{
-            System.out.println("Pizza não encontrada");
+            System.out.println("Pizza não pode ser nula");
         }
     }
 
@@ -105,9 +101,9 @@ public class Pedido {
         }
    }
 
-   public Pedido(Cliente cliente, Adicional adicional, Pizza pizza, Estado estado, Tamanho tamanho, Date data){
+   public Pedido(Cliente cliente, List<Adicional> adicionais, Pizza pizza, Estado estado, Tamanho tamanho, Date data){
         setCliente(cliente);
-        setAdicional(adicional);
+        setAdicionais(adicionais);
         setPizza(pizza);
         setEstado(estado);
         setTamanho(tamanho);
@@ -117,17 +113,16 @@ public class Pedido {
     public Pedido() {
     }
 
-    public String toString(){
-        return "Pedido: " +
-                "Cliente= "+"|"+
-                "Adicional= "+"|"+
-                "Pizza= "+"|"+
-                "Estado= "+"|"+
-                "Tamanho= "+"|"+
-                "Data= ";
-   }
-
-
-
-
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", adicionais=" + adicionais +
+                ", pizza=" + pizza +
+                ", estado=" + estado +
+                ", tamanho=" + tamanho +
+                ", data=" + data +
+                '}';
+    }
 }
