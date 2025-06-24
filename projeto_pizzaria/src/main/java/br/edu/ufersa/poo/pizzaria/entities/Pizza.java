@@ -1,27 +1,31 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 import jakarta.persistence.*;
 
-import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import java.util.UUID;
+
 @Entity
-@Table(name="pizza");
+@Table(name="pizzas")
 public class Pizza {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     @ManyToOne
-    @JoinColumns(name = "tipo_pizza_id", nullable = false)
-    private TipoPizza pizza;
+    @JoinColumn(name = "tipo_pizza_id", nullable = false)
+    private TipoPizza tipo;
+
     @ManyToOne
-    @JoinColumns(name = "clientes_id", nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    public TipoPizza getPizza(){
+    public TipoPizza getPizza() {return this.tipo;}
 
-        return pizza;
-    }
-
-    public void setPizza(TipoPizza pizza){
-        if(pizza!=null){
-            this.pizza = pizza;
+    public void setTipo(TipoPizza tipo){
+        if(tipo!=null){
+            this.tipo = tipo;
         }else{
-            System.out.println("Pizza não encontrada");
+            System.out.println("Tipo não encontrado");
         }
     }
 
@@ -37,12 +41,9 @@ public class Pizza {
         }
     }
 
-    public Pizza(TipoPizza pizza, Cliente cliente){
-        setPizza(pizza);
+    public Pizza(TipoPizza tipo, Cliente cliente){
+        setTipo(tipo);
         setCliente(cliente);
-        BancoFake.pizzas.add(this);
-    
-        
     }
 
    public Pizza(){}

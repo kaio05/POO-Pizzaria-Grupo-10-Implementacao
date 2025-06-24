@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Estado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Adicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Adicional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pedidos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/repositories/PizzaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/repositories/PizzaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/repositories/PizzaRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/repositories/PizzaRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PizzaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PizzaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PizzaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PizzaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +22,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2yeMUJ7B1jvWj7h7p6U2iV6X4KG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,9 +37,13 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "pedido-tp",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/UFERSA/poo/projeto_pizzaria",
+    "last_opened_file_path": "C:/UFERSA/poo/POO-Pizzaria-Grupo-10-Implementacao/projeto_pizzaria",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -60,6 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1750190599990</updated>
       <workItem from="1750190601163" duration="78000" />
+      <workItem from="1750791381762" duration="3150000" />
     </task>
     <servers />
   </component>

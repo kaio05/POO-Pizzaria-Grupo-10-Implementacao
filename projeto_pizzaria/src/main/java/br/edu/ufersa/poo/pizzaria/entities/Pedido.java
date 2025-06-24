@@ -1,33 +1,42 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import jakarta.persistence.*
-
-import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "Pedidos")
 
-public class Pedidos {
+public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    public class Pedidos(){}
+
     @ManyToOne
-    @JoinColumn(name="clientes",nullable = false)
+    @JoinColumn(name="cliente_id",nullable = false)
     private Cliente cliente;
-    @ManyToOne
-    @JoinColumn(name="adicionais",nullable = false)
-    private Adicional adicional;
-    @ManyToOne
-    @JoinColumn(name="pizza",nullable = false)
+
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_adicional",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "adicional_id")
+    )
+    private List<Adicional> adicionais = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pizza_id") // Cria a FK em Pedido
     private Pizza pizza;
-    Column(nullable = false)
+
+    @Column(nullable = false)
     private Estado estado;
-    Column(nullable = false)
+
+    @Column(nullable = false)
     private Tamanho tamanho;
-    Column(nullable = false)
+
+    @Column(nullable = false)
     private Date data;
 
     public Cliente getCliente(){
@@ -96,7 +105,7 @@ public class Pedidos {
         }
    }
 
-   public Pedidos(Cliente cliente, Adicional adicional, Pizza pizza, Estado estado, Tamanho tamanho, Date data){
+   public Pedido(Cliente cliente, Adicional adicional, Pizza pizza, Estado estado, Tamanho tamanho, Date data){
         setCliente(cliente);
         setAdicional(adicional);
         setPizza(pizza);
@@ -105,7 +114,10 @@ public class Pedidos {
         setData(data);
    }
 
-   public String toString(){
+    public Pedido() {
+    }
+
+    public String toString(){
         return "Pedido: " +
                 "Cliente= "+"|"+
                 "Adicional= "+"|"+

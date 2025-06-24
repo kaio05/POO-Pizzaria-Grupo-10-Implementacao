@@ -1,6 +1,5 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 
-import br.edu.ufersa.poo.pizzaria.db.BancoFake;
 import jakarta.persistence.*;
 
 import java.util.UUID;

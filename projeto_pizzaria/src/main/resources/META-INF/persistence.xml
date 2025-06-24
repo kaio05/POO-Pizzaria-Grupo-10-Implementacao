@@ -11,6 +11,8 @@
         <class>br.edu.ufersa.poo.pizzaria.entities.Cliente</class>
         <class>br.edu.ufersa.poo.pizzaria.entities.Adicional</class>
         <class>br.edu.ufersa.poo.pizzaria.entities.TipoPizza</class>
+        <class>br.edu.ufersa.poo.pizzaria.entities.Pizza</class>
+        <class>br.edu.ufersa.poo.pizzaria.entities.Pedido</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
