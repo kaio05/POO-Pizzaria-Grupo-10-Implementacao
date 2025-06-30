@@ -12,12 +12,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository repo = new UsuarioRepositoryImpl();
 
     @Override
-    public Usuario getById(UUID id) {
-        return repo.findById(id);
+    public Usuario getById(Usuario usuario) {
+        return repo.findById(usuario);
     }
     @Override
-    public Usuario getByEmail(String email) {
-        return repo.findByEmail(email);
+    public Usuario getByEmail(Usuario usuario) {
+        return repo.findByEmail(usuario);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void register(Usuario usuario) {
-        if(repo.findByEmail(usuario.getEmail()) != null) {
+        if(repo.findByEmail(usuario) != null) {
             throw new IllegalArgumentException("Email já cadastrado");
         }
         // TODO: Fazer hash da senha
@@ -35,25 +35,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void changeEmail(UUID id, String newEmail) {
-        Usuario usuario = repo.findById(id);
-        if(usuario == null) throw new IllegalArgumentException("Usuário não encontrado");
-        usuario.setEmail(newEmail);
+    public void update(Usuario usuario) {
+        Usuario usuarioExists = repo.findById(usuario);
+        if(usuarioExists == null) throw new IllegalArgumentException("Usuário não encontrado");
         repo.update(usuario);
     }
 
     @Override
-    public void changePassword(UUID id, String newPassword) {
-        Usuario usuario = repo.findById(id);
-        if(usuario == null) throw new IllegalArgumentException("Usuário não encontrado");
-        usuario.setSenha(newPassword);
-        repo.update(usuario);
-    }
-
-    @Override
-    public void remove(UUID id) {
-        Usuario usuario = repo.findById(id);
-        if(usuario != null) repo.delete(usuario);
+    public void remove(Usuario usuario) {
+        Usuario usuarioExists = repo.findById(usuario);
+        if(usuarioExists != null) repo.delete(usuario);
     }
 
     @Override

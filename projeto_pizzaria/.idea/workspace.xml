@@ -4,29 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/db/BancoFake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Adicional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Estado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pedidos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Pizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Tamanho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/TipoPizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entity/Usuario.java" afterDir="false" />
-    </list>
+    <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2yeMUJ7B1jvWj7h7p6U2iV6X4KG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,6 +30,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

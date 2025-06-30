@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UsuarioService {
-    Usuario getById(UUID id);
-    Usuario getByEmail(String email);
+    Usuario getById(Usuario usuario);
+    Usuario getByEmail(Usuario usuario);
     List<Usuario> getAll();
     void register(Usuario usuario);
-    void changeEmail(UUID id, String newEmail);
-    void changePassword(UUID id, String newPassword);
-    void remove(UUID id);
+    void update(Usuario usuario);
+    void remove(Usuario usuario);
     void login(String email, String password);
 }

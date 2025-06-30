@@ -14,8 +14,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     private final EntityManager em = JPAUtil.getEntityManagerFactory();
 
     @Override
-    public Usuario findById(UUID id) {
-        return em.find(Usuario.class, id);
+    public Usuario findById(Usuario usuario) {
+        return em.find(Usuario.class, usuario.getId());
     }
 
     @Override
@@ -54,9 +54,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public Usuario findByEmail(String email) {
+    public Usuario findByEmail(Usuario usuario) {
         TypedQuery<Usuario> query = em.createQuery("from Usuario where email = :email", Usuario.class);
-        query.setParameter("email", email);
+        query.setParameter("email", usuario.getEmail());
         return query.getResultStream().findFirst().orElse(null);
     }
 }
