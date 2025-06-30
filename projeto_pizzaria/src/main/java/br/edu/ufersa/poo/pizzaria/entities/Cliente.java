@@ -1,12 +1,12 @@
 package br.edu.ufersa.poo.pizzaria.entities;
+import java.io.Serializable;
 import java.util.UUID;
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente {
-
+public class Cliente implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface Service<T> {
-    T getById(UUID id);
+    T getById(T t);
     List<T> getAll();
     void register(T t);
-    void remove(UUID id);
+    void update(T t);
+    void remove(T t);
 }
