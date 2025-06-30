@@ -13,44 +13,26 @@ public class ClienteServiceImpl extends ServiceImpl<Cliente> implements ClienteS
     public ClienteServiceImpl() {
         super(new ClienteRepositoryImpl(Cliente.class, JPAUtil.getEntityManagerFactory()));
     }
-
     private final ClienteRepository repo = new ClienteRepositoryImpl(Cliente.class, JPAUtil.getEntityManagerFactory());
 
     @Override
-    public Cliente getByCpf(String cpf) {
-        return repo.findByCpf(cpf);
+    public Cliente getByCpf(Cliente cliente) {
+        return repo.findByCpf(cliente);
     }
 
     @Override
     public void register(Cliente cliente) {
-        if(repo.findByCpf(cliente.getCpf()) != null) {
+        if(repo.findByCpf(cliente) != null) {
             throw new IllegalArgumentException("CPF já cadastrado");
         }
         repo.save(cliente);
     }
 
-
     @Override
-    public void changeName(UUID id, String newName) {
-        Cliente cliente = repo.findById(id);
-        if(cliente == null) throw new IllegalArgumentException("Cliente não encontrado");
-        cliente.setNome(newName);
-        repo.update(cliente);
-    }
-
-    @Override
-    public void changeAddress(UUID id, String newAddress) {
-        Cliente cliente = repo.findById(id);
-        if(cliente == null) throw new IllegalArgumentException("Cliente não encontrado");
-        cliente.setEndereco(newAddress);
-        repo.update(cliente);
-    }
-
-    @Override
-    public void changeNumber(UUID id, String newNumber) {
-        Cliente cliente = repo.findById(id);
-        if(cliente == null) throw new IllegalArgumentException("Cliente não encontrado");
-        cliente.setTelefone(newNumber);
+    public void update(Cliente cliente) {
+        if(repo.findById(cliente) == null) {
+            throw new IllegalArgumentException("Cliente não cadastrado");
+        }
         repo.update(cliente);
     }
 }

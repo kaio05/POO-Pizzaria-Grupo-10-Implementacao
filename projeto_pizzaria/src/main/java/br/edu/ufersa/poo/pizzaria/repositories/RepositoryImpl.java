@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.repositories;
 
+import br.edu.ufersa.poo.pizzaria.entities.Entidade;
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -7,7 +8,7 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.UUID;
 
-public abstract class RepositoryImpl<T> implements Repository<T> {
+public abstract class RepositoryImpl<T extends Entidade> implements Repository<T> {
 
     protected final EntityManager em;
     private final Class<T> entityClass;
@@ -18,8 +19,8 @@ public abstract class RepositoryImpl<T> implements Repository<T> {
     }
 
     @Override
-    public T findById(UUID id) {
-        return em.find(entityClass, id);
+    public T findById(T t) {
+        return em.find(entityClass, t.getId());
     }
 
     @Override

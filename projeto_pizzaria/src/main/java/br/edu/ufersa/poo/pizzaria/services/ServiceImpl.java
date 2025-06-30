@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.services;
 
+import br.edu.ufersa.poo.pizzaria.entities.Entidade;
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.repositories.Repository;
 import jakarta.persistence.EntityManager;
@@ -7,7 +8,7 @@ import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class ServiceImpl<T> implements Service<T> {
+public abstract class ServiceImpl<T extends Entidade> implements Service<T> {
 
     protected final Repository<T> repo;
 
@@ -16,8 +17,8 @@ public abstract class ServiceImpl<T> implements Service<T> {
     }
 
     @Override
-    public T getById(UUID id) {
-        return repo.findById(id);
+    public T getById(T t) {
+        return repo.findById(t);
     }
 
     @Override
@@ -26,9 +27,9 @@ public abstract class ServiceImpl<T> implements Service<T> {
     }
 
     @Override
-    public void remove(UUID id) {
-        T t = repo.findById(id);
-        if(t != null) repo.delete(t);
+    public void remove(T t) {
+        T tExists = repo.findById(t);
+        if(tExists != null) repo.delete(t);
     }
 
 }

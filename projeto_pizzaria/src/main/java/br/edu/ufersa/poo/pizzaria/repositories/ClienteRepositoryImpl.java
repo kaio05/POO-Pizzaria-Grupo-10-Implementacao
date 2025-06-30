@@ -16,9 +16,9 @@ public class ClienteRepositoryImpl extends RepositoryImpl<Cliente> implements Cl
     }
 
     @Override
-    public Cliente findByCpf(String cpf) {
+    public Cliente findByCpf(Cliente cliente) {
         TypedQuery<Cliente> query = em.createQuery("from Cliente where cpf = :cpf", Cliente.class);
-        query.setParameter("cpf", cpf);
+        query.setParameter("cpf", cliente.getCpf());
         return query.getResultStream().findFirst().orElse(null);
     }
 
