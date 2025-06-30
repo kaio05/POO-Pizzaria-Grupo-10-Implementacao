@@ -1,20 +1,24 @@
 package br.edu.ufersa.poo.pizzaria.services;
 
+import br.edu.ufersa.poo.pizzaria.entities.Cliente;
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.repositories.ClienteRepository;
+import br.edu.ufersa.poo.pizzaria.repositories.ClienteRepositoryImpl;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepositoryImpl;
+import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 
 import java.util.List;
 import java.util.UUID;
 
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioService {
 
-    private final UsuarioRepository repo = new UsuarioRepositoryImpl();
-
-    @Override
-    public Usuario getById(UUID id) {
-        return repo.findById(id);
+    public UsuarioServiceImpl() {
+        super(new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory()));
     }
+
+    private final UsuarioRepository repo = new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory());
+
     @Override
     public Usuario getByEmail(String email) {
         return repo.findByEmail(email);
@@ -48,12 +52,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(usuario == null) throw new IllegalArgumentException("Usuário não encontrado");
         usuario.setSenha(newPassword);
         repo.update(usuario);
-    }
-
-    @Override
-    public void remove(UUID id) {
-        Usuario usuario = repo.findById(id);
-        if(usuario != null) repo.delete(usuario);
     }
 
     @Override

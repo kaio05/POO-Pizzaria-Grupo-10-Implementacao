@@ -1,18 +1,31 @@
 package br.edu.ufersa.poo.pizzaria.entities;
+import jakarta.persistence.*;
 
-import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import java.util.UUID;
 
+@Entity
+@Table(name="pizzas")
 public class Pizza {
-    private TipoPizza pizza;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_pizza_id", nullable = false)
+    private TipoPizza tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    public TipoPizza getPizza(){
-        return pizza;
-    }
+    public TipoPizza getPizza() {return this.tipo;}
 
-    public void setPizza(TipoPizza pizza){
-        if(pizza!=null){
-            this.pizza = pizza;
+    public void setTipo(TipoPizza tipo){
+        if(tipo!=null){
+            this.tipo = tipo;
+        }else{
+            System.out.println("Tipo não encontrado");
         }
     }
 
@@ -23,28 +36,16 @@ public class Pizza {
     public void setCliente(Cliente cliente){
         if(cliente != null){
             this.cliente = cliente;
+        }else {
+            System.out.println("Cliente não encontrado");
         }
     }
 
-    public Pizza(TipoPizza pizza, Cliente cliente){
-        setPizza(pizza);
+    public Pizza(TipoPizza tipo, Cliente cliente){
+        setTipo(tipo);
         setCliente(cliente);
-        BancoFake.pizzas.add(this);
-    
-        
     }
 
-    public Pizza buscarPizza(TipoPizza tipo, Cliente c){
-        for(Pizza p : BancoFake.pizzas){
-            if(p.getPizza().getNome().equals(pizza.getNome()) && p.getCliente().getNome().equals(cliente.getNome())){
-                return p;
-            }
-        else{
-            System.out.println("Não encontrado!");
-        }
-        }
-        return new Pizza(tipo, cliente);
-    }
-
+   public Pizza(){}
 
 }
