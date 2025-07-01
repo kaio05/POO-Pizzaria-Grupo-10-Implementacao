@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UsuarioRepository extends Repository<Usuario> {
-    Usuario findByEmail(String email);
+    Usuario findByEmail(Usuario usuario);
 }

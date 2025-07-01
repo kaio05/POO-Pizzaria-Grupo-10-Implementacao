@@ -2,8 +2,8 @@ package br.edu.ufersa.poo.pizzaria.services;
 
 import br.edu.ufersa.poo.pizzaria.entities.Cliente;
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
-import br.edu.ufersa.poo.pizzaria.repositories.ClienteRepository;
-import br.edu.ufersa.poo.pizzaria.repositories.ClienteRepositoryImpl;
+import br.edu.ufersa.poo.pizzaria.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.repositories.Repository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepositoryImpl;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
@@ -16,22 +16,11 @@ public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioS
     public UsuarioServiceImpl() {
         super(new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory()));
     }
-
     private final UsuarioRepository repo = new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory());
 
     @Override
-    public Usuario getByEmail(String email) {
-        return repo.findByEmail(email);
-    }
-
-    @Override
-    public List<Usuario> getAll() {
-        return repo.findAll();
-    }
-
-    @Override
     public void register(Usuario usuario) {
-        if(repo.findByEmail(usuario.getEmail()) != null) {
+        if(repo.findByEmail(usuario) != null) {
             throw new IllegalArgumentException("Email já cadastrado");
         }
         // TODO: Fazer hash da senha
@@ -39,23 +28,18 @@ public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioS
     }
 
     @Override
-    public void changeEmail(UUID id, String newEmail) {
-        Usuario usuario = repo.findById(id);
-        if(usuario == null) throw new IllegalArgumentException("Usuário não encontrado");
-        usuario.setEmail(newEmail);
+    public void update(Usuario usuario) {
+        if(repo.findById(usuario) == null) throw new IllegalArgumentException("Usuário não encontrado");
         repo.update(usuario);
     }
 
     @Override
-    public void changePassword(UUID id, String newPassword) {
-        Usuario usuario = repo.findById(id);
-        if(usuario == null) throw new IllegalArgumentException("Usuário não encontrado");
-        usuario.setSenha(newPassword);
-        repo.update(usuario);
+    public Usuario getByEmail(Usuario usuario) {
+        return repo.findByEmail(usuario);
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(Usuario usuario) {
         // TODO: A implementar
         System.out.println("Usuário logado!");
     }
