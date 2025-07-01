@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.repositories;
 
+import br.edu.ufersa.poo.pizzaria.entities.Cliente;
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 import jakarta.persistence.EntityManager;

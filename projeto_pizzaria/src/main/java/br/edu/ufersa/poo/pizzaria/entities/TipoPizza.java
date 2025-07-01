@@ -1,57 +1,70 @@
 package br.edu.ufersa.poo.pizzaria.entities;
 
-import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.*;
 
+import java.util.UUID;
+
+@Entity
+@Table(name = "tipos_pizza")
 public class TipoPizza {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String codigo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    @Column(nullable = false, unique = true)
     private String nome;
+
+    @Column(nullable = false)
     private double valor;
 
+    //  Get Id
+    public UUID getId() {
+        return id;
+    }
     //  Get e Set nome
     public String getNome(){
         return nome;
     }
-    
     public void setNome(String nome){
         if(nome!= null){
             this.nome = nome;
         }
     }
-
     //  Get e Set valor
     public double getValor(){
         return valor;
     }
-
     public void setValor(double valor){
         if(valor > 0){
             this.valor = valor;
         }
     }
-
-    // Construtor 
-    public TipoPizza(String nome, double valor) {
-        this.setNome(nome);
-        this.setValor(valor);
+    // Construtor
+    public TipoPizza(){}
+    public TipoPizza(String codigo, String nome, double valor) {
+        setCodigo(codigo);
+        setNome(nome);
+        setValor(valor);
     }
 
-    // Cadastrar
-    public static void cadastrar(String nome, double valor) {
-        BancoFake.tiposPizza.add(new TipoPizza(nome, valor));
-    }
-
-    // Editar
-    public static void editar(String nomeAntigo, String novoNome, double novoValor) {
-        for (TipoPizza tipo : BancoFake.tiposPizza) {
-            if (tipo.nome.equals(nomeAntigo)) {
-                tipo.nome = novoNome;
-                tipo.valor = novoValor;
-                break;
-            }
-        }
-    }
-
-    // Excluir
-    public static void excluir(String nome) {
-        BancoFake.tiposPizza.removeIf(tipo -> tipo.nome.equals(nome));
+    @Override
+    public String toString() {
+        return "TipoPizza{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                '}';
     }
 }

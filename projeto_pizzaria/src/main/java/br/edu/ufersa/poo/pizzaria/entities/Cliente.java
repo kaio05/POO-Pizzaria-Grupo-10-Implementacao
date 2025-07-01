@@ -1,10 +1,15 @@
 package br.edu.ufersa.poo.pizzaria.entities;
+import java.io.Serializable;
 import java.util.UUID;
 import br.edu.ufersa.poo.pizzaria.db.BancoFake;
+import jakarta.persistence.*;
 
-public class Cliente {
+@Entity
+@Table(name = "clientes")
+public class Cliente implements Entidade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String nome, endereco, cpf, telefone;
 
     public Cliente(String nome, String endereco, String cpf, String telefone) {
         setNome(nome);
@@ -13,56 +18,22 @@ public class Cliente {
         setTelefone(telefone);
     }
 
-    public Cliente(UUID id, String nome, String endereco, String cpf, String telefone) {
-        setId(id);        
-        setNome(nome);
-        setEndereco(endereco);
-        setCpf(cpf);
-        setTelefone(telefone);
-    }
-
-    public Cliente(UUID id) {
-        setId(id);
-    }
-
     public Cliente() {}
 
-    public void cadastrar(String nome, String endereco, String cpf, String telefone) {
-        if(!(validarNull(nome) && validarNull(endereco) && validarNull(cpf) && validarNull(telefone)))
-            throw new Error("Preencha todos os campos corretamente!");
-        Cliente cliente = new Cliente(nome, endereco, cpf, telefone);
-        if (BancoFake.exists(cliente)) {
-            throw new Error("Cliente já cadastrado!");
-        }
-        cliente.id = UUID.randomUUID();
-        BancoFake.save(cliente);
-    }
+    @Column(nullable = false)
+    private String nome;
 
-    public void editar(UUID id, String nome, String endereco, String cpf, String telefone) {
-        Cliente cliente = new Cliente(id, nome, endereco, cpf, telefone);
-        if (!BancoFake.exists(cliente)) {
-            throw new Error("Cliente não existe!");
-        }
-        BancoFake.update(cliente);
-    }
+    @Column(nullable = false)
+    private String endereco;
 
-    public void excluir(UUID id) {
-        Cliente cliente = new Cliente(id);
-        if (!BancoFake.exists(cliente)) {
-            throw new Error("Cliente não existe!");
-        }
-        BancoFake.remove(cliente);
-    }
-    
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
+    @Column(nullable = false, unique = true)
+    private String telefone;
+
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        if(!id.equals(""))
-            this.id = id;
-        else
-            throw new Error("Argumento inválido do tipo UUID!");
     }
 
     public String getNome() {
@@ -70,10 +41,10 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        if(nome != "")
+        if (nome != null && !nome.isEmpty())
             this.nome = nome;
         else
-            throw new Error("Argumento inválido do tipo String!");
+            System.out.println("Nome não pode ser nulo");
     }
 
     public String getEndereco() {
@@ -81,10 +52,10 @@ public class Cliente {
     }
 
     public void setEndereco(String endereco) {
-        if(endereco != "")
+        if (endereco != null && !endereco.isEmpty())
             this.endereco = endereco;
         else
-            throw new Error("Argumento inválido do tipo String!");
+            System.out.println("Endereço não pode ser nulo");
     }
 
     public String getCpf() {
@@ -92,10 +63,10 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        if(cpf != "")
+        if (cpf != null && !cpf.isEmpty())
             this.cpf = cpf;
         else
-            throw new Error("Argumento inválido do tipo String!");
+            System.out.println("CPF não pode ser nulo");
     }
 
     public String getTelefone() {
@@ -103,13 +74,20 @@ public class Cliente {
     }
 
     public void setTelefone(String telefone) {
-        if(telefone != "")
+        if (telefone != null && !telefone.isEmpty())
             this.telefone = telefone;
         else
-            throw new Error("Argumento inválido do tipo String!");
+            System.out.println("Telefone não pode ser nulo");
     }
 
-    public boolean validarNull(String campo) {
-        return campo != null;
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
     }
 }
