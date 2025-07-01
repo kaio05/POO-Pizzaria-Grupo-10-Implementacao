@@ -1,29 +1,21 @@
 package br.edu.ufersa.poo.pizzaria.services;
 
 import br.edu.ufersa.poo.pizzaria.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.repositories.Repository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepositoryImpl;
+import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 
 import java.util.List;
 import java.util.UUID;
 
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioService {
 
-    private final UsuarioRepository repo = new UsuarioRepositoryImpl();
-
-    @Override
-    public Usuario getById(Usuario usuario) {
-        return repo.findById(usuario);
+    public UsuarioServiceImpl() {
+        super(new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory()));
     }
-    @Override
-    public Usuario getByEmail(Usuario usuario) {
-        return repo.findByEmail(usuario);
-    }
-
-    @Override
-    public List<Usuario> getAll() {
-        return repo.findAll();
-    }
+    private final UsuarioRepository repo = new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory());
 
     @Override
     public void register(Usuario usuario) {
@@ -36,19 +28,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void update(Usuario usuario) {
-        Usuario usuarioExists = repo.findById(usuario);
-        if(usuarioExists == null) throw new IllegalArgumentException("Usuário não encontrado");
+        if(repo.findById(usuario) == null) throw new IllegalArgumentException("Usuário não encontrado");
         repo.update(usuario);
     }
 
     @Override
-    public void remove(Usuario usuario) {
-        Usuario usuarioExists = repo.findById(usuario);
-        if(usuarioExists != null) repo.delete(usuario);
+    public Usuario getByEmail(Usuario usuario) {
+        return repo.findByEmail(usuario);
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(Usuario usuario) {
         // TODO: A implementar
         System.out.println("Usuário logado!");
     }
