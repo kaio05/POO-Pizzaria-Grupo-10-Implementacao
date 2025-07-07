@@ -1,12 +1,8 @@
 package br.edu.ufersa.poo.pizzaria.repositories;
 
 import br.edu.ufersa.poo.pizzaria.entities.Entidade;
-import br.edu.ufersa.poo.pizzaria.entities.Usuario;
-import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-
-import java.util.UUID;
 
 public abstract class RepositoryImpl<T extends Entidade> implements Repository<T> {
 

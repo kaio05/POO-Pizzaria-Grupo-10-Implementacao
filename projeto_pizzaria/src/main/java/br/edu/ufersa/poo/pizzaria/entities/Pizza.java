@@ -5,7 +5,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="pizzas")
-public class Pizza {
+public class Pizza implements Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -16,7 +16,7 @@ public class Pizza {
     private TipoPizza tipo;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "clientes_id", nullable = false)
     private Cliente cliente;
 
     public TipoPizza getPizza() {return this.tipo;}
@@ -48,4 +48,17 @@ public class Pizza {
 
    public Pizza(){}
 
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "id=" + id +
+                ", tipo=" + tipo +
+                ", cliente=" + cliente +
+                '}';
+    }
 }

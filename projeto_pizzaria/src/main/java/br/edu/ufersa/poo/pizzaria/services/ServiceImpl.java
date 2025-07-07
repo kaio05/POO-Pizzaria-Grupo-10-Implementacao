@@ -1,9 +1,7 @@
 package br.edu.ufersa.poo.pizzaria.services;
 
 import br.edu.ufersa.poo.pizzaria.entities.Entidade;
-import br.edu.ufersa.poo.pizzaria.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.repositories.Repository;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.UUID;
