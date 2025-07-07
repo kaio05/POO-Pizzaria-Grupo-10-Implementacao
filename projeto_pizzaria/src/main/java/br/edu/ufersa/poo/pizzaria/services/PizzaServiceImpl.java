@@ -4,17 +4,20 @@ import br.edu.ufersa.poo.pizzaria.entities.Pizza;
 import br.edu.ufersa.poo.pizzaria.repositories.PizzaRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.PizzaRepositoryImpl;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.UUID;
 
 public class PizzaServiceImpl extends ServiceImpl<Pizza> implements PizzaService {
 
-    public PizzaServiceImpl() {
-        super(new PizzaRepositoryImpl(Pizza.class, JPAUtil.getEntityManagerFactory()));
+    private final PizzaRepository repo;
+
+    public PizzaServiceImpl(EntityManager em) {
+        super(new PizzaRepositoryImpl(Pizza.class, em));
+        this.repo = new PizzaRepositoryImpl(Pizza.class, em);
     }
 
-    private final PizzaRepository repo = new PizzaRepositoryImpl(Pizza.class, JPAUtil.getEntityManagerFactory());
 
     @Override
     public List<Pizza> getByClientId(UUID clienteId) {
@@ -28,6 +31,11 @@ public class PizzaServiceImpl extends ServiceImpl<Pizza> implements PizzaService
 
     @Override
     public void register(Pizza pizza) {
-        System.out.println("Pizza é registrada pelo pedido");
+        repo.save(pizza);
+    }
+
+    @Override
+    public void update(Pizza pizza) {
+
     }
 }

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tipos_pizza")
-public class TipoPizza {
+public class TipoPizza implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

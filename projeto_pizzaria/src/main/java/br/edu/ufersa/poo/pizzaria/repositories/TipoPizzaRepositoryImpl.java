@@ -1,6 +1,5 @@
 package br.edu.ufersa.poo.pizzaria.repositories;
 
-import br.edu.ufersa.poo.pizzaria.entities.Adicional;
 import br.edu.ufersa.poo.pizzaria.entities.TipoPizza;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;

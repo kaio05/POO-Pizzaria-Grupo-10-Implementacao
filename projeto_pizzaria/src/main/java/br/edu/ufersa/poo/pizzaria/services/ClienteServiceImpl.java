@@ -10,10 +10,12 @@ import java.util.UUID;
 
 public class ClienteServiceImpl extends ServiceImpl<Cliente> implements ClienteService {
 
-    public ClienteServiceImpl() {
-        super(new ClienteRepositoryImpl(Cliente.class, JPAUtil.getEntityManagerFactory()));
+    private final ClienteRepository repo;
+
+    public ClienteServiceImpl(EntityManager em) {
+        super(new ClienteRepositoryImpl(Cliente.class, em));
+        this.repo = new ClienteRepositoryImpl(Cliente.class, em);
     }
-    private final ClienteRepository repo = new ClienteRepositoryImpl(Cliente.class, JPAUtil.getEntityManagerFactory());
 
     @Override
     public Cliente getByCpf(Cliente cliente) {
