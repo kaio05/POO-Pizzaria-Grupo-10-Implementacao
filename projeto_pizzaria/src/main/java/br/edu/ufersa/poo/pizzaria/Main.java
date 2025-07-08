@@ -1,78 +1,57 @@
 package br.edu.ufersa.poo.pizzaria;
 
-import br.edu.ufersa.poo.pizzaria.entities.Usuario;
-import br.edu.ufersa.poo.pizzaria.services.UsuarioServiceImpl;
-import br.edu.ufersa.poo.pizzaria.entities.Cliente;
-import br.edu.ufersa.poo.pizzaria.repositories.ClienteRepositoryImpl;
-import br.edu.ufersa.poo.pizzaria.services.ClienteServiceImpl;
-import br.edu.ufersa.poo.pizzaria.entities.Adicional;
-import br.edu.ufersa.poo.pizzaria.entities.TipoPizza;
+import br.edu.ufersa.poo.pizzaria.entities.*;
 import br.edu.ufersa.poo.pizzaria.services.*;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
+import jakarta.persistence.EntityManager;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-// TODO: Chame o serviço e adicione pelo menos dois usuários no banco de dados. Tente utilizar os outros métodos também
+        // TODO: Chame o serviço e adicione pelo menos dois usuários no banco de dados. Tente utilizar os outros métodos também
+
+        EntityManager em = JPAUtil.getEntityManagerFactory();
+
+//        var adService = new AdicionalServiceImpl(em);
+//        var codAdicional1 = new Adicional("0003","Palmito",3.50);
+//        adService.register(codAdicional1);
+//        var codAdicional2 = new Adicional("0004","Bacon",5);
+//        adService.register(codAdicional2);
+//        var adicional1 = adService.getByCode("0003");
+//        var adicional2 = adService.getByCode("0004");
+//        List<Adicional> adicionais = new ArrayList<Adicional>();
+//        adicionais.add(adicional1);
+
+//        var tipoCod = new TipoPizza("0005", "Portuguesa", 15);
+//        var tpService = new TipoPizzaServiceImpl(em);
+//        tpService.register(tipoCod);
+//        var tipo = tpService.getByCode("0005");
+
+        var cService = new ClienteServiceImpl(em);
+        var clienteCpf = new Cliente("João", "rua dos pássaros", "591819021", "88945672345");
+//        cService.register(clienteCpf);
+        var cliente = cService.getByCpf(clienteCpf);
+
+//        var pizzaService = new PizzaServiceImpl(em);
+//        var pizzaReg = new Pizza(tipo, cliente);
+//        pizzaService.register(pizzaReg);
+//        var pizza = pizzaService.getAll().get(0);
 //
-//        var cService = new ClienteServiceImpl();
-//        var cliente = new Cliente("Francisco", "av. presidente erika hilton", "45342134769", "5544332211");
-//        cService.register(cliente);
-//        cService.getAll().forEach(System.out::println);
-//
-//        var clienteMod = cService.getByCpf(cliente);
-//        clienteMod.setTelefone("1122334455");
-//        cService.update(clienteMod);
-//        cService.getAll().forEach(System.out::println);
-//
-//        cService.remove(clienteMod);
-//        cService.getAll().forEach(System.out::println);
-//
-        var uService = new UsuarioServiceImpl();
-        var usuario = new Usuario("Williams", "will@example.com", "12345678");
-        uService.register(usuario);
-        System.out.println(usuario);
-        uService.getAll().forEach(System.out::println);
+//        var estado = Estado.NOVO;
+//        var tamanho = Tamanho.M;
+//        var data = new Date(2025, 7, 8);
 
-        var usuarioMod = uService.getByEmail(usuario);
-        usuarioMod.setNome("Will");
-        System.out.println(usuarioMod);
-        uService.update(usuarioMod);
-        uService.getAll().forEach(System.out::println);
 
-        uService.remove(usuarioMod);
-        uService.getAll().forEach(System.out::println);
-
-//        Adicional
-
-//        AdicionalService adicionalService = new AdicionalServiceImpl();
-
-//        Adicional adicional = new Adicional("0001", "Bacon", 5.90);
-//        adicionalService.register(adicional);
-//        adicionalService.getAll().forEach(System.out::println);
-
-//        Adicional adicionalMod = adicionalService.getByCode("0001");
-//        adicionalService.changeValue(adicionalMod.getId(), 6.20);
-//        adicionalService.getAll().forEach(System.out::println);
-//
-//        adicionalService.remove(adicionalMod.getId());
-//        adicionalService.getAll().forEach(System.out::println);
-
-//        Tipo Pizza
-
-//        TipoPizzaService tipoPizzaService = new TipoPizzaServiceImpl();
-//
-//        TipoPizza tipo = new TipoPizza("0001", "Calabresa", 17.0);
-//        tipoPizzaService.register(tipo);
-//        System.out.println(tipoPizzaService.getAll());
-//
-//        TipoPizza tipoMod = tipoPizzaService.getByCode("0001");
-//
-//        tipoPizzaService.changeName(tipoMod.getId(), "4 Queijos");
-//        System.out.println(tipoPizzaService.getAll());
-
-//        tipoPizzaService.remove(tipoMod.getId());
-//        System.out.println(tipoPizzaService.getAll());=
-
+        var pService = new PedidoServiceImpl(em);
+//        var pedidoReg = new Pedido(cliente, adicionais, pizza, estado, tamanho, data);
+//        pService.register(pedidoReg);
+        var pedido = pService.getByCliente(cliente).get(0);
+        pService.getAll().forEach(System.out::println);
+        pService.remove(pedido);
+        pService.getAll().forEach(System.out::println);
         JPAUtil.shutdown();
     }
 }

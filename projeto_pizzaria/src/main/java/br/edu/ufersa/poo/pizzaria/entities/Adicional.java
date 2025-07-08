@@ -2,11 +2,12 @@ package br.edu.ufersa.poo.pizzaria.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "adicionais")
-public class Adicional {
+public class Adicional implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

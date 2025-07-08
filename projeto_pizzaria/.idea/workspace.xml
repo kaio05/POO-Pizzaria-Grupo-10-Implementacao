@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="" />
+    <list default="true" id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Adicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Adicional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/entities/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/AdicionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/AdicionalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/AdicionalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/AdicionalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PedidoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PedidoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PedidoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufersa/poo/pizzaria/services/PedidoServiceImpl.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +44,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "pedido-tp",
+    "git-widget-placeholder": "pedido",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/UFERSA/poo/projeto_pizzaria",
     "node.js.detected.package.eslint": "true",
