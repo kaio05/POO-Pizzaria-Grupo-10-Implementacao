@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Pedidos")
 
-public class Pedido {
+public class Pedido implements Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -124,5 +124,10 @@ public class Pedido {
                 ", tamanho=" + tamanho +
                 ", data=" + data +
                 '}';
+    }
+
+    @Override
+    public UUID getId() {
+        return this.id;
     }
 }

@@ -4,40 +4,19 @@ import br.edu.ufersa.poo.pizzaria.entities.Adicional;
 import br.edu.ufersa.poo.pizzaria.repositories.AdicionalRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.AdicionalRepositoryImpl;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
+import jakarta.persistence.EntityManager;
 
 import java.util.UUID;
 
 public class AdicionalServiceImpl extends ServiceImpl<Adicional> implements AdicionalService {
 
-    public AdicionalServiceImpl() {
-        super(new AdicionalRepositoryImpl(Adicional.class, JPAUtil.getEntityManagerFactory()));
+    private final AdicionalRepository repo;
+
+    public AdicionalServiceImpl(EntityManager em) {
+        super(new AdicionalRepositoryImpl(Adicional.class, em));
+        this.repo = new AdicionalRepositoryImpl(Adicional.class, em);
     }
 
-    private final AdicionalRepository repo = new AdicionalRepositoryImpl(Adicional.class, JPAUtil.getEntityManagerFactory());
-
-    @Override
-    public void changeCode(UUID id, String newCode) {
-        Adicional adicional = repo.findById(id);
-        if(adicional == null) throw new IllegalArgumentException("Adicional não encontrado");
-        adicional.setCodigo(newCode);
-        repo.update(adicional);
-    }
-
-    @Override
-    public void changeName(UUID id, String newName) {
-        Adicional adicional = repo.findById(id);
-        if(adicional == null) throw new IllegalArgumentException("Adicional não encontrado");
-        adicional.setNome(newName);
-        repo.update(adicional);
-    }
-
-    @Override
-    public void changeValue(UUID id, double newValue) {
-        Adicional adicional = repo.findById(id);
-        if(adicional == null) throw new IllegalArgumentException("Adicional não encontrado");
-        adicional.setValor(newValue);
-        repo.update(adicional);
-    }
 
     @Override
     public Adicional getByCode(String code) {
@@ -50,5 +29,10 @@ public class AdicionalServiceImpl extends ServiceImpl<Adicional> implements Adic
             throw new IllegalArgumentException("Código já cadastrado");
         }
         repo.save(adicional);
+    }
+
+    @Override
+    public void update(Adicional adicional) {
+        // a implementar
     }
 }

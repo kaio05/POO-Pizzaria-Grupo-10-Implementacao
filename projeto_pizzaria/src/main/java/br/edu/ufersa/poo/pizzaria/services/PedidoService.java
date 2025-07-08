@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PedidoService extends Service<Pedido> {
-    void changeName(UUID id, String newName);
-    void changeAdicionais(UUID id, List<Adicional> newAdicionais);
-    void changePizza(UUID id, Pizza newPizza);
     void register(Pedido pedido);
     List<Pedido> getByCliente(Cliente cliente);
 }
