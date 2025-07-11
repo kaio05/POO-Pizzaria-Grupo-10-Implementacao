@@ -7,16 +7,20 @@ import br.edu.ufersa.poo.pizzaria.repositories.Repository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepository;
 import br.edu.ufersa.poo.pizzaria.repositories.UsuarioRepositoryImpl;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
+import br.edu.ufersa.poo.pizzaria.utils.Session;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.UUID;
 
 public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioService {
 
-    public UsuarioServiceImpl() {
-        super(new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory()));
+    private final UsuarioRepository repo;
+
+    public UsuarioServiceImpl(EntityManager em) {
+        super(new UsuarioRepositoryImpl(Usuario.class, em));
+        repo = new UsuarioRepositoryImpl(Usuario.class,em);
     }
-    private final UsuarioRepository repo = new UsuarioRepositoryImpl(Usuario.class, JPAUtil.getEntityManagerFactory());
 
     @Override
     public void register(Usuario usuario) {
@@ -40,7 +44,9 @@ public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioS
 
     @Override
     public void login(Usuario usuario) {
-        // TODO: A implementar
-        System.out.println("Usuário logado!");
+        Usuario usuarioExists = repo.findByEmail(usuario);
+        if(usuarioExists == null) throw new IllegalArgumentException("Usuário não encontrado");
+        if(!usuarioExists.getSenha().equals(usuario.getSenha())) throw new IllegalArgumentException("Usuário ou senha incorretos");
+        Session.setUsuario(usuario);
     }
 }
