@@ -5,7 +5,7 @@ import br.edu.ufersa.poo.pizzaria.model.entities.TipoPizza;
 import java.util.UUID;
 
 public interface TipoPizzaService extends Service<TipoPizza> {
-    void changeName(UUID id, String newName);
-    void changeValue(UUID id, double newValue);
-    TipoPizza getByCode(String codigo);
+    void changeName(TipoPizza tp, String newName);
+    void changeValue(TipoPizza tp, double newValue);
+    TipoPizza getByCode(TipoPizza tp);
 }

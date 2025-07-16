@@ -18,29 +18,35 @@ public class TipoPizzaServiceImpl extends ServiceImpl<TipoPizza> implements Tipo
 
 
     @Override
-    public void changeName(UUID id, String newName) {
-        TipoPizza tipoPizza = repo.findById(new TipoPizza());
-        if(tipoPizza == null) throw new IllegalArgumentException("TipoPizza não encontrado");
-        tipoPizza.setNome(newName);
-        repo.update(tipoPizza);
+    public void changeName(TipoPizza tp, String newName) {
+        TipoPizza tipoPizza = repo.findById(tp);
+        if(tipoPizza == null) {
+            throw new IllegalArgumentException("TipoPizza não encontrado");
+        }else{
+            tipoPizza.setNome(newName);
+            repo.update(tipoPizza);
+        }
     }
 
     @Override
-    public void changeValue(UUID id, double newValue) {
-        TipoPizza tipoPizza = repo.findById(new TipoPizza());
-        if(tipoPizza == null) throw new IllegalArgumentException("TipoPizza não encontrado");
-        tipoPizza.setValor(newValue);
-        repo.update(tipoPizza);
+    public void changeValue(TipoPizza tp, double newValue) {
+        TipoPizza tipoPizza = repo.findById(tp);
+        if(tipoPizza == null) {
+            throw new IllegalArgumentException("TipoPizza não encontrado");
+        }else {
+            tipoPizza.setValor(newValue);
+            repo.update(tipoPizza);
+        }
     }
 
     @Override
-    public TipoPizza getByCode(String code) {
-        return repo.findByCode(code);
+    public TipoPizza getByCode(TipoPizza tp) {
+        return repo.findByCode(tp);
     }
 
     @Override
     public void register(TipoPizza tipoPizza) {
-        if(repo.findByCode(tipoPizza.getCodigo()) != null) {
+        if(repo.findByCode(tipoPizza) != null) {
             throw new IllegalArgumentException("Tipo já cadastrado");
         }
         repo.save(tipoPizza);

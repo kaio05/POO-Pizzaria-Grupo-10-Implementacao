@@ -12,9 +12,9 @@ public class TipoPizzaRepositoryImpl extends RepositoryImpl<TipoPizza> implement
     }
 
     @Override
-    public TipoPizza findByCode(String code) {
+    public TipoPizza findByCode(TipoPizza  tipoPizza) {
         TypedQuery<TipoPizza> query = em.createQuery("From TipoPizza where codigo = :code", TipoPizza.class);
-        query.setParameter("code", code);
+        query.setParameter("code", tipoPizza.getCodigo());
         return query.getResultStream().findFirst().orElse(null);
     }
 

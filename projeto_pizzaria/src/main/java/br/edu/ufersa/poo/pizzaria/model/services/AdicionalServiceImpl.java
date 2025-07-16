@@ -16,13 +16,13 @@ public class AdicionalServiceImpl extends ServiceImpl<Adicional> implements Adic
 
 
     @Override
-    public Adicional getByCode(String code) {
-        return repo.findByCode(code);
+    public Adicional getByCode(Adicional adic) {
+        return repo.findByCode(adic);
     }
 
     @Override
     public void register(Adicional adicional) {
-        if(repo.findByCode(adicional.getCodigo()) != null) {
+        if(repo.findByCode(adicional) != null) {
             throw new IllegalArgumentException("Código já cadastrado");
         }
         repo.save(adicional);

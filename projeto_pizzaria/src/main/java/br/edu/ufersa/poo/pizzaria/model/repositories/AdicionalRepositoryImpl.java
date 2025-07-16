@@ -15,9 +15,9 @@ public class AdicionalRepositoryImpl extends RepositoryImpl<Adicional> implement
     }
 
     @Override
-    public Adicional findByCode(String code) {
+    public Adicional findByCode(Adicional adic) {
         TypedQuery<Adicional> query = em.createQuery("From Adicional where codigo = :code", Adicional.class);
-        query.setParameter("code", code);
+        query.setParameter("code", adic.getCodigo());
         return query.getResultStream().findFirst().orElse(null);
     }
 }
