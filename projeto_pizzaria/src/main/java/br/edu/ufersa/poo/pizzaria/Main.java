@@ -1,13 +1,9 @@
 package br.edu.ufersa.poo.pizzaria;
 
-import br.edu.ufersa.poo.pizzaria.entities.*;
-import br.edu.ufersa.poo.pizzaria.services.*;
+import br.edu.ufersa.poo.pizzaria.model.entities.*;
+import br.edu.ufersa.poo.pizzaria.model.services.*;
 import br.edu.ufersa.poo.pizzaria.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
