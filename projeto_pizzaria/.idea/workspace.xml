@@ -13,12 +13,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
@@ -34,18 +34,17 @@
   }
 }]]></component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
+  &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2yeMUJ7B1jvWj7h7p6U2iV6X4KG" />
+  <component name="ProjectId" id="2zy1M97mbnoBqdh7P1fbDYHdEiz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -62,12 +61,12 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="88a90d88-dd03-4509-92af-3366b2398cf0" name="Changes" comment="" />
-      <created>1750190599990</created>
+      <created>1752688447318</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1750190599990</updated>
-      <workItem from="1750190601163" duration="78000" />
-      <workItem from="1750791381762" duration="3150000" />
+      <updated>1752688447318</updated>
+      <workItem from="1752688448487" duration="210000" />
+      <workItem from="1752692605726" duration="1641000" />
     </task>
     <servers />
   </component>

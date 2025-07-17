@@ -1,6 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.utils;
 
-import br.edu.ufersa.poo.pizzaria.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
 
 public class Session {
     private static Usuario usuario;
