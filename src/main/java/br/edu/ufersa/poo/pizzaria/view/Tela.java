@@ -28,7 +28,7 @@ public class Tela extends Application {
         stage.show();
     }
     public static void telaCadastro(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaCadastro.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/hello-view.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 800, 600);

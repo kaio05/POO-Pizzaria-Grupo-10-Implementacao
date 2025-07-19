@@ -13,6 +13,9 @@ module br.edu.ufersa.poo.pizzaria {
     requires java.sql;
     requires jakarta.persistence;
     requires java.desktop;
+    requires org.hibernate.orm.core;
+
+    opens br.edu.ufersa.poo.pizzaria.model.entities;
 
     opens br.edu.ufersa.poo.pizzaria.view to javafx.fxml;
     exports br.edu.ufersa.poo.pizzaria.view;
@@ -22,5 +25,5 @@ module br.edu.ufersa.poo.pizzaria {
     opens br.edu.ufersa.poo.pizzaria.exceptions to javafx.fxml;
     exports br.edu.ufersa.poo.pizzaria.exceptions;
 
-    opens br.edu.ufersa.poo.pizzaria.model.entities to org.hibernate.orm.core;
+
 }
