@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.model.repositories;
 
+import br.edu.ufersa.poo.pizzaria.model.entities.Cargo;
 import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -23,5 +24,12 @@ public class UsuarioRepositoryImpl extends RepositoryImpl<Usuario> implements Us
         TypedQuery<Usuario> query = em.createQuery("from Usuario where email = :email", Usuario.class);
         query.setParameter("email", usuario.getEmail());
         return query.getResultStream().findFirst().orElse(null);
+    }
+
+    @Override
+    public boolean findAdmin(Usuario usuario) {
+        TypedQuery<Usuario> query = em.createQuery("from Usuario where cargo = :cargo", Usuario.class);
+        query.setParameter("cargo", usuario.getCargo());
+        return query.getSingleResultOrNull() != null;
     }
 }

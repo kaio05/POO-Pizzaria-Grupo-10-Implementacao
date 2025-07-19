@@ -28,6 +28,7 @@ public class LoginController {
         logante.setSenha(senha.getText());
         try {
             service.login(logante);
+            erro.setVisible(false);
             JOptionPane.showMessageDialog(null, "Autenticado com sucesso!");
             Tela.telaPrincipal();
         } catch (Exception e) {
@@ -35,8 +36,5 @@ public class LoginController {
             erro.setTextFill(Color.RED);
             erro.setVisible(true);
         }
-    }
-    @FXML public void cadastrar (ActionEvent event){
-        Tela.telaCadastro();
     }
 }

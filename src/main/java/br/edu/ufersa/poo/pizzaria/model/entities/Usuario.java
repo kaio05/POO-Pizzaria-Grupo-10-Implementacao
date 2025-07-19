@@ -21,12 +21,24 @@ public class Usuario implements Entidade {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private Cargo cargo;
+
     public Usuario() {}
 
-    public Usuario(String nome, String email, String senha) {
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Usuario(String nome, String email, String senha, Cargo cargo) {
         setNome(nome);
         setEmail(email);
         setSenha(senha);
+        setCargo(cargo);
     }
 
     public UUID getId() {
@@ -72,6 +84,7 @@ public class Usuario implements Entidade {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
+                ", cargo=" + cargo +
                 '}';
     }
 }

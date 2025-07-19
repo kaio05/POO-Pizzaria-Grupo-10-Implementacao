@@ -1,5 +1,10 @@
 package br.edu.ufersa.poo.pizzaria.view;
 
+import br.edu.ufersa.poo.pizzaria.model.entities.Cargo;
+import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
+import br.edu.ufersa.poo.pizzaria.model.services.UsuarioService;
+import br.edu.ufersa.poo.pizzaria.model.services.UsuarioServiceImpl;
+import br.edu.ufersa.poo.pizzaria.utils.EMSingleton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +21,8 @@ public class Tela extends Application {
         telaLogin();
     }
     public static void telaLogin(){
+        UsuarioService usuarioService = new UsuarioServiceImpl(EMSingleton.getInstance());
+        usuarioService.seed(new Usuario("Michelangelo", "mich@email.com", "pizza", Cargo.ADMIN));
         FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaLogin.fxml"));
         Scene scene = null;
         try {
@@ -28,7 +35,7 @@ public class Tela extends Application {
         stage.show();
     }
     public static void telaCadastro(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaCadastro.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 800, 600);

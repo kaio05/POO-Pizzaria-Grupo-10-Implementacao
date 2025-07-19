@@ -13,10 +13,10 @@ import javafx.scene.paint.Color;
 
 import javax.swing.*;
 
-public class UsuarioController {
-    @FXML private TextField userName;
-    @FXML private PasswordField senha;
+public class CadastroController {
+    @FXML private TextField nome;
     @FXML private TextField email;
+    @FXML private PasswordField senha;
     @FXML private Label erro;
 
     UsuarioService service = new UsuarioServiceImpl(JPAUtil.getEntityManagerFactory());
@@ -25,7 +25,7 @@ public class UsuarioController {
         Tela.telaLogin();
     }
     @FXML public void cadastrar(){
-        novoUsu.setNome(userName.getText());
+        novoUsu.setNome(nome.getText());
         novoUsu.setEmail(email.getText());
         novoUsu.setSenha(senha.getText());
         try {
