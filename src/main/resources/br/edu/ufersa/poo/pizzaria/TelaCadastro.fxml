@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.UsuarioController">
+   <children>
+      <Label layoutX="139.0" layoutY="115.0" text="Nome Completo:" />
+      <Label layoutX="205.0" layoutY="160.0" text="Login:" />
+      <Label layoutX="203.0" layoutY="208.0" text="Senha:" />
+      <Button layoutX="194.0" layoutY="283.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+      <Button layoutX="347.0" layoutY="283.0" mnemonicParsing="false" onAction="#retornar" text="Voltar" />
+      <TextField fx:id="nome" layoutX="274.0" layoutY="110.0" />
+      <TextField fx:id="userName" layoutX="274.0" layoutY="155.0" />
+      <PasswordField fx:id="senha" layoutX="274.0" layoutY="203.0" />
+      <Label fx:id="erro" layoutX="274.0" layoutY="247.0" text="Label" visible="false" />
+   </children>
+</Pane>
