@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.model.services;
 
+import br.edu.ufersa.poo.pizzaria.exceptions.BadRequestException;
 import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.model.repositories.UsuarioRepository;
 import br.edu.ufersa.poo.pizzaria.model.repositories.UsuarioRepositoryImpl;
@@ -36,10 +37,12 @@ public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioS
     }
 
     @Override
-    public void login(Usuario usuario) {
+    public void login(Usuario usuario) throws BadRequestException {
+        if(usuario.getEmail() == null || usuario.getSenha() == null) throw new BadRequestException("Preencha os campos obrigatórios");
+        if(usuario.getEmail().isBlank() || usuario.getSenha().isBlank()) throw new BadRequestException("Preencha os campos obrigatórios");
         Usuario usuarioExists = repo.findByEmail(usuario);
-        if(usuarioExists == null) throw new IllegalArgumentException("Usuário não encontrado");
-        if(!usuarioExists.getSenha().equals(usuario.getSenha())) throw new IllegalArgumentException("Usuário ou senha incorretos");
+        if(usuarioExists == null) throw new BadRequestException("Usuário não encontrado");
+        if(!usuarioExists.getSenha().equals(usuario.getSenha())) throw new BadRequestException("Usuário ou senha incorretos");
         Session.setUsuario(usuario);
     }
 }
