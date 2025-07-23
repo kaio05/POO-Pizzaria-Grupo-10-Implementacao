@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.ClienteRegisterController">
+   <children>
+      <Label fx:id="nome" layoutX="23.0" layoutY="14.0" text="Nome">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="endereco" layoutX="23.0" layoutY="42.0" text="endereco" />
+      <Label fx:id="cpf" layoutX="23.0" layoutY="69.0" text="cpf">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="telefone" layoutX="164.0" layoutY="69.0" text="telefone" />
+   </children>
+</Pane>

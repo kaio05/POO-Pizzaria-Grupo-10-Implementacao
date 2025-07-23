@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.view;
 
+import br.edu.ufersa.poo.pizzaria.controller.DashboardController;
 import br.edu.ufersa.poo.pizzaria.model.entities.Cargo;
 import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.model.services.UsuarioService;
@@ -8,6 +9,7 @@ import br.edu.ufersa.poo.pizzaria.utils.EMSingleton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,18 +48,38 @@ public class Tela extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    public static void telaPrincipal(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaPrincipal.fxml"));
-        Scene scene = null;
+    public static void dashboard(){
         try {
-            scene = new Scene(fxmlLoader.load(), 800, 600);
+            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/Dashboard.fxml"));
+            Pane root = fxmlLoader.load();
+
+            Scene scene = new Scene(root, 800, 600);
+            stage.setTitle("Dashboard");
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
     }
+    public Pane loadSideBar() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/SideBar.fxml"));
+        return loader.load();
+    }
+
+    public static void clientes() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/Clientes.fxml"));
+            Pane root = fxmlLoader.load();
+
+            Scene scene = new Scene(root, 800, 600);
+            stage.setTitle("Clientes");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main (String[] ags){
         launch();
     }

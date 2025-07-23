@@ -44,7 +44,7 @@ public class UsuarioServiceImpl extends ServiceImpl<Usuario> implements UsuarioS
         Usuario usuarioExists = repo.findByEmail(usuario);
         if(usuarioExists == null) throw new BadRequestException("Usuário não encontrado");
         if(!usuarioExists.getSenha().equals(usuario.getSenha())) throw new BadRequestException("Usuário ou senha incorretos");
-        Session.setUsuario(usuario);
+        Session.setUsuario(usuarioExists);
     }
 
     public void seed(Usuario usuario) {
