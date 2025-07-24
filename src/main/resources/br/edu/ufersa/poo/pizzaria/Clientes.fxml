@@ -15,7 +15,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="355.0">
                <children>
-                  <VBox fx:id="clientContainer" prefHeight="495.0" prefWidth="355.0" />
+                  <VBox fx:id="clienteContainer" prefHeight="495.0" prefWidth="355.0" />
                </children></AnchorPane>
         </content>
       </ScrollPane>
@@ -47,6 +47,11 @@
                </font>
             </Button>
             <Label fx:id="erro" layoutX="13.0" layoutY="23.0" text="erro" />
+            <Button fx:id="buttonEditarCliente" layoutX="35.0" layoutY="332.0" mnemonicParsing="false" onAction="#update_cliente" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Editar" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

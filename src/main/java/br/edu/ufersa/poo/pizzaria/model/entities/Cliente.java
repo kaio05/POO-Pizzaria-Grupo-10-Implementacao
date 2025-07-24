@@ -60,6 +60,10 @@ public class Cliente implements Entidade {
         return cpf;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public void setCpf(String cpf) {
         if (cpf != null && !cpf.isEmpty())
             this.cpf = cpf;
