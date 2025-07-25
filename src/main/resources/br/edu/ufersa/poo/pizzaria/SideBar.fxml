@@ -12,7 +12,7 @@
    <children>
       <Pane prefHeight="600.0" prefWidth="216.0" style="-fx-background-color: #fff;">
          <children>
-            <Button layoutX="51.0" layoutY="494.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Sair" textFill="WHITE">
+            <Button fx:id="buttonSair" layoutX="52.0" layoutY="493.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Sair" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -33,6 +33,7 @@
                   <Image url="@assets/R.jpeg" />
                </image></ImageView>
             <Button layoutX="19.0" layoutY="169.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_home" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Home" />
+            <Button fx:id="buttonUsuarios" layoutX="20.0" layoutY="486.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_usuarios" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #1ad; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Usuários" visible="false" />
          </children>
       </Pane>
    </children>

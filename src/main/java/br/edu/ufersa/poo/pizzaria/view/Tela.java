@@ -32,7 +32,19 @@ public class Tela extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public static void usuarios(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaUsuarios.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 800, 600);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Usuário");
         stage.setScene(scene);
         stage.show();
     }
@@ -44,7 +56,7 @@ public class Tela extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("Cadastro");
         stage.setScene(scene);
         stage.show();
     }

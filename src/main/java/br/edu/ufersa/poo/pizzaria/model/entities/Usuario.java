@@ -12,6 +12,10 @@ public class Usuario implements Entidade {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     @Column(nullable = false)
     private String nome;
 
