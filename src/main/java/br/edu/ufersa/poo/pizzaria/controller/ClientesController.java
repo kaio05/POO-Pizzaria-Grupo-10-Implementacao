@@ -28,6 +28,7 @@ public class ClientesController {
     @FXML private TextField novoClienteTelefone;
     @FXML private Button buttonCriarCliente;
     @FXML private Button buttonEditarCliente;
+    @FXML private AnchorPane popupBG;
     private static volatile ClientesController controller;
     List<Cliente> clientes;
 
@@ -38,6 +39,7 @@ public class ClientesController {
     @FXML public void initialize() {
         controller = this;
         erro.setVisible(false);
+        fechar_popup();
         FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/Sidebar.fxml"));
         try {
             AnchorPane sidebar = sidebarLoader.load();
@@ -57,10 +59,6 @@ public class ClientesController {
                     controller.setLabelCpf(cliente.getCpf());
                     controller.setLabelEndereco(cliente.getEndereco());
                     controller.setLabelTelefone(cliente.getTelefone());
-                    novoClienteNome.setText("");
-                    novoClienteCpf.setText("");
-                    novoClienteEndereco.setText("");
-                    novoClienteTelefone.setText("");
                     clienteContainer.getChildren().add(registro);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -71,6 +69,18 @@ public class ClientesController {
 
     ClienteService service = new ClienteServiceImpl(EMSingleton.getInstance());
     Cliente novoCliente = new Cliente();
+
+    @FXML public void abrir_popup() {
+        popupBG.setVisible(true);
+    }
+
+    @FXML public void fechar_popup() {
+        novoClienteNome.setText("");
+        novoClienteCpf.setText("");
+        novoClienteEndereco.setText("");
+        novoClienteTelefone.setText("");
+        popupBG.setVisible(false);
+    }
 
     @FXML public void criar_cliente() {
         novoCliente.setNome(novoClienteNome.getText());
@@ -89,6 +99,7 @@ public class ClientesController {
             controller.setLabelEndereco(novoCliente.getEndereco());
             controller.setLabelTelefone(novoCliente.getTelefone());
             clienteContainer.getChildren().add(registro);
+            fechar_popup();
         } catch (Exception e) {
             erro.setText(e.getMessage());
             erro.setTextFill(Color.RED);
@@ -97,6 +108,7 @@ public class ClientesController {
     }
 
     @FXML public void edit_cliente(Cliente clienteEditar) {
+        abrir_popup();
         this.buttonCriarCliente.setVisible(false);
         this.buttonEditarCliente.setVisible(true);
         novoClienteNome.setText(clienteEditar.getNome());
@@ -115,5 +127,9 @@ public class ClientesController {
         clienteUpdate.setTelefone(novoClienteTelefone.getText());
         service.update(clienteUpdate);
         Tela.clientes();
+    }
+
+    @FXML public void buscar_cliente() {
+        System.out.println("Buscando");
     }
 }

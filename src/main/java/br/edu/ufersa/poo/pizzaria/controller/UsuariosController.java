@@ -31,6 +31,7 @@ public class UsuariosController {
     @FXML private TextField novoUsuarioSenha;
     @FXML private Button buttonCriarUsuario;
     @FXML private Button buttonEditarUsuario;
+    @FXML private AnchorPane popupBG;
     private static volatile UsuariosController controller;
     List<Usuario> usuarios;
 
@@ -41,6 +42,7 @@ public class UsuariosController {
     @FXML public void initialize() {
         controller = this;
         erro.setVisible(false);
+        fechar_popup();
         FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/Sidebar.fxml"));
         try {
             AnchorPane sidebar = sidebarLoader.load();
@@ -74,6 +76,17 @@ public class UsuariosController {
     UsuarioService service = new UsuarioServiceImpl(EMSingleton.getInstance());
     Usuario novoUsuario = new Usuario();
 
+    @FXML public void abrir_popup() {
+        popupBG.setVisible(true);
+    }
+
+    @FXML public void fechar_popup() {
+        novoUsuarioNome.setText("");
+        novoUsuarioEmail.setText("");
+        novoUsuarioSenha.setText("");
+        popupBG.setVisible(false);
+    }
+
     @FXML public void criar_usuario() {
         novoUsuario.setNome(novoUsuarioNome.getText());
         novoUsuario.setEmail(novoUsuarioEmail.getText());
@@ -91,6 +104,7 @@ public class UsuariosController {
             controller.setSenha(novoUsuario.getSenha());
             controller.setLabelCargo(novoUsuario.getCargo());
             usuarioContainer.getChildren().add(registro);
+            fechar_popup();
         } catch (Exception e) {
             erro.setText(e.getMessage());
             erro.setTextFill(Color.RED);
@@ -99,6 +113,7 @@ public class UsuariosController {
     }
 
     @FXML public void edit_usuario(Usuario usuarioEditar) {
+        abrir_popup();
         this.buttonCriarUsuario.setVisible(false);
         this.buttonEditarUsuario.setVisible(true);
         novoUsuarioNome.setText(usuarioEditar.getNome());
@@ -117,5 +132,9 @@ public class UsuariosController {
         service.update(usuarioUpdate);
         System.out.println(usuarioUpdate);
         Tela.usuarios();
+    }
+
+    @FXML public void buscar_usuario() {
+        System.out.println("Buscando");
     }
 }

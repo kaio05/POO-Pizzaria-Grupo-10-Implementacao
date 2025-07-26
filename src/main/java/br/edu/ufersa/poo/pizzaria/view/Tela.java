@@ -80,7 +80,7 @@ public class Tela extends Application {
 
     public static void clientes() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/Clientes.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/TelaClientes.fxml"));
             Pane root = fxmlLoader.load();
 
             Scene scene = new Scene(root, 800, 600);

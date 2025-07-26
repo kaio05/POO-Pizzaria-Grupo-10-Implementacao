@@ -11,42 +11,61 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fb1;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.UsuariosController">
    <children>
-      <ScrollPane layoutX="234.0" layoutY="102.0" prefHeight="484.0" prefWidth="372.0">
+      <ScrollPane layoutX="234.0" layoutY="47.0" prefHeight="539.0" prefWidth="370.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="355.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="370.0">
                <children>
-                  <VBox fx:id="usuarioContainer" prefHeight="495.0" prefWidth="355.0" />
+                  <VBox fx:id="usuarioContainer" prefHeight="539.0" prefWidth="370.0" />
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Pane layoutX="234.0" layoutY="-2.0" prefHeight="93.0" prefWidth="566.0" style="-fx-background-color: #ddd;">
+      <Pane layoutX="611.0" layoutY="47.0" prefHeight="256.0" prefWidth="189.0" style="-fx-background-color: #ddd;">
          <children>
-            <TextField layoutX="82.0" layoutY="34.0" />
-            <Label layoutX="37.0" layoutY="38.0" text="Nome" />
-            <TextField layoutX="307.0" layoutY="34.0" />
-            <Label layoutX="262.0" layoutY="38.0" text="Email" />
-         </children>
-      </Pane>
-      <Pane layoutX="614.0" layoutY="102.0" prefHeight="484.0" prefWidth="186.0" style="-fx-background-color: #ddd;">
-         <children>
-            <TextField fx:id="novoUsuarioNome" layoutX="19.0" layoutY="75.0" />
-            <Label layoutX="18.0" layoutY="51.0" text="Nome" />
-            <TextField fx:id="novoUsuarioEmail" layoutX="19.0" layoutY="144.0" />
-            <TextField fx:id="novoUsuarioSenha" layoutX="19.0" layoutY="211.0" />
-            <Label layoutX="20.0" layoutY="119.0" text="Email" />
-            <Label layoutX="18.0" layoutY="187.0" text="Senha" />
-            <Button fx:id="buttonCriarUsuario" layoutX="27.0" layoutY="264.0" mnemonicParsing="false" onAction="#criar_usuario" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Criar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Label fx:id="erro" layoutX="13.0" layoutY="23.0" text="erro" />
-            <Button fx:id="buttonEditarUsuario" layoutX="27.0" layoutY="264.0" mnemonicParsing="false" onAction="#update_usuario" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Editar" textFill="WHITE" visible="false">
+            <TextField layoutX="20.0" layoutY="59.0" />
+            <Label layoutX="20.0" layoutY="32.0" text="Nome" />
+            <Label layoutX="20.0" layoutY="96.0" text="Email" />
+            <TextField layoutX="20.0" layoutY="120.0" />
+            <Button fx:id="buttonBuscarUsuario" layoutX="37.0" layoutY="181.0" mnemonicParsing="false" onAction="#buscar_usuario" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #193; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Buscar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </Pane>
+      <Button fx:id="buttonAbrirPopup" layoutX="642.0" layoutY="333.0" mnemonicParsing="false" onAction="#abrir_popup" prefHeight="40.0" prefWidth="127.0" style="-fx-background-color: #e21; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Novo Usuário" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="popupBG" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0002;">
+         <children>
+            <Pane layoutX="278.0" layoutY="174.0" prefHeight="270.0" prefWidth="392.0" style="-fx-background-color: #fff; -fx-background-radius: 30px;">
+               <children>
+                  <TextField fx:id="novoUsuarioNome" layoutX="29.0" layoutY="78.0" />
+                  <Label layoutX="29.0" layoutY="53.0" text="Nome" />
+                  <TextField fx:id="novoUsuarioSenha" layoutX="29.0" layoutY="144.0" />
+                  <Label layoutX="32.0" layoutY="121.0" text="Senha" />
+                  <Button fx:id="buttonCriarUsuario" layoutX="70.0" layoutY="206.0" mnemonicParsing="false" onAction="#criar_usuario" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #193; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Criar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="erro" layoutX="31.0" layoutY="25.0" text="erro" textFill="RED" />
+                  <Button fx:id="buttonEditarUsuario" layoutX="70.0" layoutY="206.0" mnemonicParsing="false" onAction="#update_usuario" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #193; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Editar" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="202.0" layoutY="206.0" mnemonicParsing="false" onAction="#fechar_popup" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="200.0" layoutY="53.0" text="Email" />
+                  <TextField fx:id="novoUsuarioEmail" layoutX="202.0" layoutY="78.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
