@@ -6,12 +6,9 @@ import br.edu.ufersa.poo.pizzaria.model.services.UsuarioService;
 import br.edu.ufersa.poo.pizzaria.model.services.UsuarioServiceImpl;
 import br.edu.ufersa.poo.pizzaria.utils.EMSingleton;
 import br.edu.ufersa.poo.pizzaria.view.Tela;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +18,6 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UsuariosController {
     @FXML private VBox usuarioContainer;
