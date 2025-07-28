@@ -14,6 +14,7 @@ module br.edu.ufersa.poo.pizzaria {
     requires jakarta.persistence;
     requires java.desktop;
     requires org.hibernate.orm.core;
+    requires itextpdf;
 
     opens br.edu.ufersa.poo.pizzaria.model.entities;
 
