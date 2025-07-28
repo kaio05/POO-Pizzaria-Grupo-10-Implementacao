@@ -26,11 +26,16 @@ public class ClientesController {
     @FXML private TextField novoClienteCpf;
     @FXML private TextField novoClienteEndereco;
     @FXML private TextField novoClienteTelefone;
+    @FXML private TextField buscaNome;
+    @FXML private TextField buscaCpf;
+    @FXML private TextField buscaEndereco;
+    @FXML private TextField buscaTelefone;
     @FXML private Button buttonCriarCliente;
     @FXML private Button buttonEditarCliente;
     @FXML private AnchorPane popupBG;
     private static volatile ClientesController controller;
     List<Cliente> clientes;
+    List<Cliente> clientesVisiveis;
 
     public static ClientesController getInstance() {
         return controller;
@@ -39,7 +44,6 @@ public class ClientesController {
     @FXML public void initialize() {
         controller = this;
         erro.setVisible(false);
-        fechar_popup();
         FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/Sidebar.fxml"));
         try {
             AnchorPane sidebar = sidebarLoader.load();
@@ -50,20 +54,8 @@ public class ClientesController {
 
         if(clientes == null) {
             clientes = service.getAll();
-            clientes.forEach(cliente -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/ClienteRegister.fxml"));
-                    Pane registro = loader.load();
-                    ClienteRegisterController controller = loader.getController();
-                    controller.setLabelNome(cliente.getNome());
-                    controller.setLabelCpf(cliente.getCpf());
-                    controller.setLabelEndereco(cliente.getEndereco());
-                    controller.setLabelTelefone(cliente.getTelefone());
-                    clienteContainer.getChildren().add(registro);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            clientesVisiveis = clientes;
+            mostrar_clientes();
         }
     }
 
@@ -99,7 +91,7 @@ public class ClientesController {
             controller.setLabelEndereco(novoCliente.getEndereco());
             controller.setLabelTelefone(novoCliente.getTelefone());
             clienteContainer.getChildren().add(registro);
-            fechar_popup();
+            Tela.clientes();
         } catch (Exception e) {
             erro.setText(e.getMessage());
             erro.setTextFill(Color.RED);
@@ -129,7 +121,34 @@ public class ClientesController {
         Tela.clientes();
     }
 
-    @FXML public void buscar_cliente() {
-        System.out.println("Buscando");
+    @FXML public void filtrar_clientes() {
+        clientesVisiveis = clientes;
+        clienteContainer.getChildren().clear();
+        if (!buscaNome.getText().isEmpty())
+            clientesVisiveis = clientesVisiveis.stream().filter(cliente -> cliente.getNome().toLowerCase().contains(buscaNome.getText().toLowerCase())).toList();
+        if (!buscaCpf.getText().isEmpty())
+            clientesVisiveis = clientesVisiveis.stream().filter(cliente -> cliente.getCpf().contains(buscaCpf.getText())).toList();
+        if (!buscaEndereco.getText().isEmpty())
+            clientesVisiveis = clientesVisiveis.stream().filter(cliente -> cliente.getEndereco().toLowerCase().contains(buscaEndereco.getText().toLowerCase())).toList();
+        if (!buscaTelefone.getText().isEmpty())
+            clientesVisiveis = clientesVisiveis.stream().filter(cliente -> cliente.getTelefone().contains(buscaTelefone.getText())).toList();
+        mostrar_clientes();
+    }
+
+    @FXML public void mostrar_clientes() {
+        clientesVisiveis.forEach(cliente -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/ClienteRegister.fxml"));
+                Pane registro = loader.load();
+                ClienteRegisterController controller = loader.getController();
+                controller.setLabelNome(cliente.getNome());
+                controller.setLabelCpf(cliente.getCpf());
+                controller.setLabelEndereco(cliente.getEndereco());
+                controller.setLabelTelefone(cliente.getTelefone());
+                clienteContainer.getChildren().add(registro);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

@@ -21,15 +21,15 @@
       </ScrollPane>
       <Pane layoutX="611.0" layoutY="35.0" prefHeight="401.0" prefWidth="189.0" style="-fx-background-color: #ddd;">
          <children>
-            <TextField layoutX="20.0" layoutY="59.0" />
+            <TextField fx:id="buscaNome" layoutX="20.0" layoutY="59.0" />
             <Label layoutX="20.0" layoutY="32.0" text="Nome" />
             <Label layoutX="20.0" layoutY="96.0" text="CPF" />
-            <TextField layoutX="20.0" layoutY="120.0" />
+            <TextField fx:id="buscaCpf" layoutX="20.0" layoutY="120.0" />
             <Label layoutX="21.0" layoutY="158.0" text="Endereço" />
-            <TextField layoutX="20.0" layoutY="180.0" />
+            <TextField fx:id="buscaEndereco" layoutX="20.0" layoutY="180.0" />
             <Label layoutX="23.0" layoutY="217.0" text="Telefone" />
-            <TextField layoutX="20.0" layoutY="242.0" />
-            <Button fx:id="buttonBuscarCliente" layoutX="36.0" layoutY="315.0" mnemonicParsing="false" onAction="#buscar_cliente" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #193; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Buscar" textFill="WHITE">
+            <TextField fx:id="buscaTelefone" layoutX="20.0" layoutY="242.0" />
+            <Button fx:id="buttonBuscarCliente" layoutX="36.0" layoutY="315.0" mnemonicParsing="false" onAction="#filtrar_clientes" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #193; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Buscar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -41,7 +41,7 @@
             </Button>
          </children>
       </Pane>
-      <AnchorPane fx:id="popupBG" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0002;">
+      <AnchorPane fx:id="popupBG" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0002;" visible="false">
          <children>
             <Pane layoutX="508.0" layoutY="300.0" prefHeight="270.0" prefWidth="392.0" style="-fx-background-color: #fff; -fx-background-radius: 30px;" translateX="-196.0" translateY="-135.0">
                <children>

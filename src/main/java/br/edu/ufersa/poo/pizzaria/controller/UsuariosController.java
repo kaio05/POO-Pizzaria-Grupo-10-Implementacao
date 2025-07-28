@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UsuariosController {
     @FXML private VBox usuarioContainer;
@@ -29,11 +30,14 @@ public class UsuariosController {
     @FXML private TextField novoUsuarioNome;
     @FXML private TextField novoUsuarioEmail;
     @FXML private TextField novoUsuarioSenha;
+    @FXML private TextField buscaNome;
+    @FXML private TextField buscaEmail;
     @FXML private Button buttonCriarUsuario;
     @FXML private Button buttonEditarUsuario;
     @FXML private AnchorPane popupBG;
     private static volatile UsuariosController controller;
     List<Usuario> usuarios;
+    List<Usuario> usuariosVisiveis;
 
     public static UsuariosController getInstance() {
         return controller;
@@ -53,23 +57,8 @@ public class UsuariosController {
 
         if(usuarios == null) {
             usuarios = service.getAll();
-            usuarios.forEach(usuario -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/UsuarioRegister.fxml"));
-                    Pane registro = loader.load();
-                    UsuarioRegisterController controller = loader.getController();
-                    controller.setLabelNome(usuario.getNome());
-                    controller.setLabelEmail(usuario.getEmail());
-                    controller.setSenha(usuario.getSenha());
-                    controller.setLabelCargo(usuario.getCargo());
-                    novoUsuarioNome.setText("");
-                    novoUsuarioEmail.setText("");
-                    novoUsuarioSenha.setText("");
-                    usuarioContainer.getChildren().add(registro);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            usuariosVisiveis = usuarios;
+            mostrar_usuarios();
         }
     }
 
@@ -104,7 +93,7 @@ public class UsuariosController {
             controller.setSenha(novoUsuario.getSenha());
             controller.setLabelCargo(novoUsuario.getCargo());
             usuarioContainer.getChildren().add(registro);
-            fechar_popup();
+            Tela.usuarios();
         } catch (Exception e) {
             erro.setText(e.getMessage());
             erro.setTextFill(Color.RED);
@@ -134,7 +123,30 @@ public class UsuariosController {
         Tela.usuarios();
     }
 
-    @FXML public void buscar_usuario() {
-        System.out.println("Buscando");
+    @FXML public void mostrar_usuarios() {
+        usuariosVisiveis.forEach(usuario -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/UsuarioRegister.fxml"));
+                Pane registro = loader.load();
+                UsuarioRegisterController controller = loader.getController();
+                controller.setLabelNome(usuario.getNome());
+                controller.setLabelEmail(usuario.getEmail());
+                controller.setSenha(usuario.getSenha());
+                controller.setLabelCargo(usuario.getCargo());
+                usuarioContainer.getChildren().add(registro);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @FXML public void filtrar_usuarios() {
+        usuariosVisiveis = usuarios;
+        usuarioContainer.getChildren().clear();
+        if (!buscaNome.getText().isEmpty())
+            usuariosVisiveis = usuariosVisiveis.stream().filter(usuario -> usuario.getNome().toLowerCase().contains(buscaNome.getText().toLowerCase())).toList();
+        if (!buscaEmail.getText().isEmpty())
+            usuariosVisiveis = usuariosVisiveis.stream().filter(usuario -> usuario.getEmail().toLowerCase().contains(buscaEmail.getText().toLowerCase())).toList();
+        mostrar_usuarios();
     }
 }
