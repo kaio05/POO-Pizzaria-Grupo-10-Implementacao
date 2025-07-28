@@ -11,36 +11,36 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fb1;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.DashboardController">
    <children>
-      <AnchorPane layoutX="353.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="363.0" style="-fx-background-radius: 30;">
+      <AnchorPane fx:id="stats" layoutX="306.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="438.0" style="-fx-background-radius: 30;">
          <children>
-            <Pane prefHeight="484.0" prefWidth="363.0" style="-fx-background-radius: 30px; -fx-background-color: #fff;">
+            <Pane prefHeight="484.0" prefWidth="438.0" style="-fx-background-radius: 30px; -fx-background-color: #fff;">
                <children>
-                  <Button layoutX="228.0" layoutY="404.0" mnemonicParsing="false" onAction="#gerarPdf" style="-fx-background-color: #f31;" text="Gerar PDF" textFill="WHITE">
+                  <Button layoutX="282.0" layoutY="426.0" mnemonicParsing="false" onAction="#gerarPdf" style="-fx-background-color: #f31;" text="Gerar PDF" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="inicioInput" layoutX="52.0" layoutY="46.0" onAction="#filtrarPedidos" prefHeight="25.0" prefWidth="108.0" />
-                  <DatePicker fx:id="fimInput" layoutX="52.0" layoutY="102.0" onAction="#filtrarPedidos" prefHeight="25.0" prefWidth="108.0" />
-                  <ChoiceBox fx:id="clienteBox" layoutX="199.0" layoutY="46.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="pizzaBox" layoutX="199.0" layoutY="102.0" prefWidth="150.0" />
-                  <Label fx:id="nPedidos" layoutX="35.0" layoutY="337.0" text="Nº de pedidos: 0">
+                  <DatePicker fx:id="inicioInput" layoutX="62.0" layoutY="46.0" onAction="#filtrarPedidos" prefHeight="25.0" prefWidth="108.0" />
+                  <DatePicker fx:id="fimInput" layoutX="62.0" layoutY="102.0" onAction="#filtrarPedidos" prefHeight="25.0" prefWidth="108.0" />
+                  <ChoiceBox fx:id="clienteBox" layoutX="252.0" layoutY="46.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="pizzaBox" layoutX="252.0" layoutY="102.0" prefWidth="150.0" />
+                  <Label fx:id="nPedidos" layoutX="34.0" layoutY="373.0" text="Nº de pedidos: 0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="adicionalMaisUsado" layoutX="35.0" layoutY="377.0" text="Adicional mais usado: x" />
-                  <Label fx:id="totalVendas" layoutX="35.0" layoutY="421.0" text="Vendas totais: R$0">
+                  <Label fx:id="adicionalMaisUsado" layoutX="34.0" layoutY="409.0" text="Adicional mais usado: x" />
+                  <Label fx:id="totalVendas" layoutX="34.0" layoutY="443.0" text="Vendas totais: R$0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nClientes" layoutX="224.0" layoutY="337.0" text="Novos clientes: 0" />
-                  <Label fx:id="inicio" layoutX="15.0" layoutY="50.0" text="Início" />
-                  <Label fx:id="fim" layoutX="15.0" layoutY="106.0" text="Fim" />
-                  <Label fx:id="cliente" layoutX="194.0" layoutY="20.0" text="Cliente" />
-                  <Label fx:id="Pizza" layoutX="199.0" layoutY="78.0" text="Pizza" />
-                  <PieChart layoutX="82.0" layoutY="157.0" prefHeight="116.0" prefWidth="105.0" />
+                  <Label fx:id="nClientes" layoutX="283.0" layoutY="373.0" text="Novos clientes: 0" />
+                  <Label fx:id="inicio" layoutX="25.0" layoutY="50.0" text="Início" />
+                  <Label fx:id="fim" layoutX="29.0" layoutY="106.0" text="Fim" />
+                  <Label fx:id="cliente" layoutX="203.0" layoutY="50.0" text="Cliente" />
+                  <Label fx:id="Pizza" layoutX="208.0" layoutY="106.0" text="Pizza" />
+                  <PieChart fx:id="chart" layoutX="24.0" layoutY="147.0" prefHeight="211.0" prefWidth="383.0" />
                </children>
             </Pane>
          </children>
