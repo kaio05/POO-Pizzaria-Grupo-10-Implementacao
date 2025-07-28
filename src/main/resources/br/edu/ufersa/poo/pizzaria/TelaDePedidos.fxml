@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fb1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.DashboardPedidos">
    <children>
       <AnchorPane layoutX="-2.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="216.0">
@@ -45,6 +44,8 @@
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
+                <AnchorPane layoutX="81.0" layoutY="185.0" minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="255.0" />
+                  <ScrollPane fx:id="infoPedidos" layoutX="15.0" layoutY="90.0" prefHeight="380.0" prefWidth="364.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="670.0" layoutY="46.0" prefHeight="498.0" prefWidth="252.0" style="-fx-background-color: ddd;">
