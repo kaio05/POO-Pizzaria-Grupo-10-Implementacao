@@ -130,4 +130,8 @@ public class Pedido implements Entidade {
     public UUID getId() {
         return this.id;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }

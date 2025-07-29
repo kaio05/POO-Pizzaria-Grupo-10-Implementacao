@@ -6,6 +6,7 @@ import br.edu.ufersa.poo.pizzaria.model.repositories.PedidoRepositoryImpl;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PedidoServiceImpl extends ServiceImpl<Pedido> implements PedidoService {
 
@@ -23,7 +24,7 @@ public class PedidoServiceImpl extends ServiceImpl<Pedido> implements PedidoServ
 
     @Override
     public void update(Pedido pedido) {
-        System.out.println("A implementar");
+        repo.update(pedido);
     }
 
     @Override
@@ -32,5 +33,10 @@ public class PedidoServiceImpl extends ServiceImpl<Pedido> implements PedidoServ
             return repo.findByCliente(cliente);
         }
         return List.of();
+    }
+
+    @Override
+    public void delete(UUID id) {
+        System.out.println("A implementar");
     }
 }

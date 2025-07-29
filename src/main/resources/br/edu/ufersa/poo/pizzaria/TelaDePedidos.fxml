@@ -62,7 +62,10 @@
                   </Label>
                   <TitledPane fx:id="pedidoAdicionais" animated="false" layoutX="31.0" layoutY="225.0" text="Adicionais">
                     <content>
-                      <AnchorPane fx:id="adicionais" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane fx:id="adicionais" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="adicionais" layoutX="17.0" layoutY="28.0" mnemonicParsing="false" text="Adicional" />
+                           </children></AnchorPane>
                     </content>
                   </TitledPane>
                   <Button fx:id="buttonFazerPedido" layoutX="58.0" layoutY="447.0" mnemonicParsing="false" onAction="#fazerPedido" prefHeight="3.0" prefWidth="148.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Fazer Pedido" textFill="WHITE">
@@ -96,7 +99,10 @@
                   <Button fx:id="buttonSabores" layoutX="19.0" layoutY="281.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_sabores" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Sabores" />
                   <Button fx:id="buttonPizzas" layoutX="19.0" layoutY="332.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_pizzas" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Pizzas" />
                   <Button fx:id="buttonAdicionais" layoutX="19.0" layoutY="386.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_adicionais" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Adicionais" />
-                  <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="74.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="74.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/R.jpeg" />
+                     </image></ImageView>
                </children>
             </Pane>
          </children>
