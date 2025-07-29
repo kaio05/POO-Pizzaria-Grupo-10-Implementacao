@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.controller;
 
+import br.edu.ufersa.poo.pizzaria.exceptions.BadRequestException;
 import br.edu.ufersa.poo.pizzaria.model.entities.Cargo;
 import br.edu.ufersa.poo.pizzaria.model.entities.Usuario;
 import br.edu.ufersa.poo.pizzaria.model.services.UsuarioService;
@@ -17,6 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class UsuariosController {
@@ -34,6 +37,7 @@ public class UsuariosController {
     private static volatile UsuariosController controller;
     List<Usuario> usuarios;
     List<Usuario> usuariosVisiveis;
+    private Usuario usuarioAntigo;
 
     public static UsuariosController getInstance() {
         return controller;
@@ -98,25 +102,30 @@ public class UsuariosController {
     }
 
     @FXML public void edit_usuario(Usuario usuarioEditar) {
+        usuarioAntigo = usuarioEditar;
         abrir_popup();
         this.buttonCriarUsuario.setVisible(false);
         this.buttonEditarUsuario.setVisible(true);
         novoUsuarioNome.setText(usuarioEditar.getNome());
         novoUsuarioEmail.setText(usuarioEditar.getEmail());
-        novoUsuarioEmail.setDisable(true);
         novoUsuarioSenha.setText(usuarioEditar.getSenha());
     }
 
     @FXML public void update_usuario() {
         Usuario usuarioUpdate = new Usuario();
         usuarioUpdate.setEmail(novoUsuarioEmail.getText());
-        usuarioUpdate.setId(service.getByEmail(usuarioUpdate).getId());
+        usuarioUpdate.setId(service.getByEmail(usuarioAntigo).getId());
         usuarioUpdate.setNome(novoUsuarioNome.getText());
         usuarioUpdate.setSenha(novoUsuarioSenha.getText());
         usuarioUpdate.setCargo(Cargo.COMUM);
-        service.update(usuarioUpdate);
-        System.out.println(usuarioUpdate);
-        Tela.usuarios();
+        try {
+            service.update(usuarioUpdate);
+            Tela.usuarios();
+        } catch(Exception e) {
+            erro.setText("Email já cadastrado");
+            erro.setTextFill(Color.RED);
+            erro.setVisible(true);
+        }
     }
 
     @FXML public void mostrar_usuarios() {

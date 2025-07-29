@@ -1,5 +1,6 @@
 package br.edu.ufersa.poo.pizzaria.controller;
 
+import br.edu.ufersa.poo.pizzaria.exceptions.BadRequestException;
 import br.edu.ufersa.poo.pizzaria.model.entities.Cliente;
 import br.edu.ufersa.poo.pizzaria.model.services.ClienteService;
 import br.edu.ufersa.poo.pizzaria.model.services.ClienteServiceImpl;
@@ -16,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class ClientesController {
@@ -36,6 +39,7 @@ public class ClientesController {
     private static volatile ClientesController controller;
     List<Cliente> clientes;
     List<Cliente> clientesVisiveis;
+    private Cliente clienteAntigo;
 
     public static ClientesController getInstance() {
         return controller;
@@ -100,12 +104,12 @@ public class ClientesController {
     }
 
     @FXML public void edit_cliente(Cliente clienteEditar) {
+        clienteAntigo = clienteEditar;
         abrir_popup();
         this.buttonCriarCliente.setVisible(false);
         this.buttonEditarCliente.setVisible(true);
         novoClienteNome.setText(clienteEditar.getNome());
         novoClienteCpf.setText(clienteEditar.getCpf());
-        novoClienteCpf.setDisable(true);
         novoClienteEndereco.setText(clienteEditar.getEndereco());
         novoClienteTelefone.setText(clienteEditar.getTelefone());
     }
@@ -113,12 +117,18 @@ public class ClientesController {
     @FXML public void update_cliente() {
         Cliente clienteUpdate = new Cliente();
         clienteUpdate.setCpf(novoClienteCpf.getText());
-        clienteUpdate.setId(service.getByCpf(clienteUpdate).getId());
+        clienteUpdate.setId(service.getByCpf(clienteAntigo).getId());
         clienteUpdate.setNome(novoClienteNome.getText());
         clienteUpdate.setEndereco(novoClienteEndereco.getText());
         clienteUpdate.setTelefone(novoClienteTelefone.getText());
-        service.update(clienteUpdate);
-        Tela.clientes();
+        try{
+            service.update(clienteUpdate);
+            Tela.clientes();
+        } catch (Exception e) {
+            erro.setText("CPF já cadastrado");
+            erro.setTextFill(Color.RED);
+            erro.setVisible(true);
+        }
     }
 
     @FXML public void filtrar_clientes() {
