@@ -27,7 +27,7 @@ public class PedidoRegisterController {
 
     public void initialize() {
         this.pedidoBuilder = new PedidoBuilderImpl();
-        this.pedidoService = new PedidoServiceImpl();
+        this.pedidoService = new PedidoServiceImpl(em);
 
         configurarEventos();
     }
@@ -41,7 +41,7 @@ public class PedidoRegisterController {
         this.pedidoAtual = pedido;
 
         nome.setText(pedido.getCliente().getNome());
-        sabor.setText(pedido.getPizza().getPizza());
+        sabor.setText(pedido.getPizza().getSabor());
         adicional.setText(formatarAdicionais(pedido.getAdicional()));
     }
 
@@ -57,6 +57,7 @@ public class PedidoRegisterController {
     private void editarPedido() {
         try {
             Pedido pedidoEditado = pedidoBuilder
+                    .withId(pedidoAtual.getId())
                     .withCliente(pedidoAtual.getCliente())
                     .withPizza(pedidoAtual.getPizza())
                     .withAdicionais(pedidoAtual.getAdicional())
