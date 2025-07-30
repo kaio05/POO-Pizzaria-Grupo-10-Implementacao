@@ -43,7 +43,6 @@ public class DashboardPedidosController {
     @FXML
     public void initialize() {
         try {
-            // Verificação inicial dos componentes críticos
             if (root == null) {
                 throw new IllegalStateException("Root AnchorPane não foi injetado corretamente");
             }
@@ -51,7 +50,6 @@ public class DashboardPedidosController {
             carregarSidebar();
             carregarAdicionais();
 
-            // Configuração condicional dos componentes
             if (escolher != null) {
                 configurarMenuFiltro();
             }
@@ -138,7 +136,6 @@ public class DashboardPedidosController {
         try {
             System.out.println("Botão fazer pedido clicado!"); // Log para depuração
 
-            // 1. Validação dos campos obrigatórios
             if (cliente.getText() == null || cliente.getText().trim().isEmpty()) {
                 mostrarErro("Por favor, informe o nome do cliente!");
                 cliente.requestFocus();
@@ -151,23 +148,18 @@ public class DashboardPedidosController {
                 return;
             }
 
-            // 2. Obter adicionais selecionados
             List<Adicional> adicionaisSelecionados = obterAdicionaisSelecionados();
             System.out.println("Adicionais selecionados: " + adicionaisSelecionados.size());
 
-            // 3. Determinar tamanho da pizza
             Tamanho tamanho = determinarTamanho();
             System.out.println("Tamanho selecionado: " + tamanho);
 
-            // 4. Buscar cliente no banco de dados
             Cliente clientePedido = buscarCliente(cliente.getText().trim());
             System.out.println("Cliente encontrado: " + clientePedido.getNome());
 
-            // 5. Buscar pizza no banco de dados
             Pizza pizzaPedido = buscarPizza(sabor.getText().trim());
             System.out.println("Pizza encontrada: " + pizzaPedido.getPizza().getNome());
 
-            // 6. Construir o pedido
             Pedido novoPedido = pedidoBuilder
                     .withCliente(clientePedido)
                     .withPizza(pizzaPedido)
@@ -247,8 +239,6 @@ public class DashboardPedidosController {
     }
 
     private void exibirPedidos(List<Pedido> pedidos) {
-        // Implementação sugerida: usar TableView para exibir os pedidos
-        // Esta é uma implementação básica - adapte conforme necessário
         if (infoPedidos == null) return;
 
         VBox container = new VBox(5);
