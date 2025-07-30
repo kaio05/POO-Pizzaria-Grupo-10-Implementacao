@@ -47,7 +47,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="800.0">
+            <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="667.0">
                <children>
                   <ChoiceBox fx:id="checkTipo" layoutX="542.0" layoutY="68.0" prefHeight="25.0" prefWidth="100.0" />
                </children>

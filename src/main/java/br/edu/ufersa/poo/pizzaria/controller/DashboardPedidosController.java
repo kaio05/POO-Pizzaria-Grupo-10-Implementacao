@@ -1,6 +1,5 @@
 package br.edu.ufersa.poo.pizzaria.controller;
 
-import br.edu.ufersa.poo.pizzaria.builder.Builder;
 import br.edu.ufersa.poo.pizzaria.builder.PedidoBuilderImpl;
 import br.edu.ufersa.poo.pizzaria.model.entities.*;
 import br.edu.ufersa.poo.pizzaria.model.services.*;
@@ -17,9 +16,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DashboardPedidosController {
+
+    // Componentes FXML
     @FXML private TextField cliente;
     @FXML private TextField sabor;
     @FXML private TitledPane pedidoAdicionais;
@@ -29,179 +31,288 @@ public class DashboardPedidosController {
     @FXML private ScrollPane infoPedidos;
     @FXML private AnchorPane root;
     @FXML private VBox listaAdicionais;
-    @FXML private ChoiceBox checkTipo;
+    @FXML private ChoiceBox<String> checkTipo;
 
+    // Serviços
+    private final PedidoBuilderImpl pedidoBuilder = new PedidoBuilderImpl();
+    private final AdicionalService adicionalService = new AdicionalServiceImpl(EMSingleton.getInstance());
+    private final ClienteService clienteService = new ClienteServiceImpl(EMSingleton.getInstance());
+    private final PedidoService pedidoService = new PedidoServiceImpl(EMSingleton.getInstance());
+    private final PizzaService pizzaService = new PizzaServiceImpl(EMSingleton.getInstance());
 
-        // Dados e serviços
-        private final Builder pedidoBuilder = new PedidoBuilderImpl();
-
-        @FXML
-        public void initialize() {/*
-            configurarComponentes();
-            carregarDadosIniciais();*/
-            FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/Sidebar.fxml"));
-                try {
-                AnchorPane sidebar = sidebarLoader.load();
-                root.getChildren().add(sidebar);
-            } catch (
-            IOException e) {
-                throw new RuntimeException(e);
+    @FXML
+    public void initialize() {
+        try {
+            // Verificação inicial dos componentes críticos
+            if (root == null) {
+                throw new IllegalStateException("Root AnchorPane não foi injetado corretamente");
             }
 
-            AdicionalService adicionalService = new AdicionalServiceImpl(EMSingleton.getInstance());
-            List<Adicional>  adicionais = new ArrayList<>(adicionalService.getAll());
-            for(Adicional adicional: adicionais) {
-                CheckBox checkBox = new CheckBox(adicional.getNome());
-                listaAdicionais.getChildren().add(checkBox);
+            carregarSidebar();
+            carregarAdicionais();
+
+            // Configuração condicional dos componentes
+            if (escolher != null) {
+                configurarMenuFiltro();
             }
 
-        }
-
-        private void configurarComponentes() {
-            // Configuração do MenuButton de filtro
-            MenuItem filtrarPorCliente = new MenuItem("Cliente");
-            MenuItem filtrarPorSabor = new MenuItem("Sabor");
-            escolher.getItems().addAll(filtrarPorCliente, filtrarPorSabor);
-
-            // Eventos
-            buttonFazerPedidos.setLocation(event -> criarPedido());
-            filtrarPorCliente.setLocation(event -> filtrarPedidos("cliente"));
-            filtrarPorSabor.setLocation(event -> filtrarPedidos("sabor"));
-        }
-
-        private void carregarDadosIniciais() {
-            // Carrega adicionais disponíveis
-            List<Adicional> adicionais = pedidoService.listarAdicionais();
-            adicionais.forEach(adicional -> {
-                CheckBox checkBox = new CheckBox(adicional.getNome());
-                adicionaisPane.getChildren().add(checkBox);
-                adicionaisCheckboxes.add(checkBox);
-            });
-        }
-
-        @FXML
-        private void criarPedido() {
-            PedidoService pedidoService = new PedidoServiceImpl(EMSingleton.getInstance());
-            try {
-                // 1. Obter adicionais selecionados
-                List<Adicional> adicionaisSelecionados = new ArrayList<>();
-                for (Node node : listaAdicionais.getChildren()) {
-                    // Verifica se o node é uma CheckBox
-                    if (node instanceof CheckBox) {
-                        CheckBox checkBox = (CheckBox) node; // Faz o casting
-
-                        // Se estiver selecionado, busca o adicional correspondente
-                        if (checkBox.isSelected()) {
-                            List<Adicional> adicionais = new AdicionalServiceImpl(EMSingleton.getInstance()).getAll();
-                            Adicional adicional = null;
-                            for(Adicional a: adicionais) {
-                                if(a.getNome().equals(checkBox.getText())) {
-                                    adicional = a;
-                                    return;
-                                }
-                            }
-                            if (adicional != null) {
-                                adicionaisSelecionados.add(adicional);
-                            }
-                        }
-                    }
-                }
-
-                // 2. Construir pedido com Builder
-                Pedido novoPedido = pedidoBuilder
-                        .withCliente(parseCliente(cliente.getText()))
-                        .withPizza(parsePizza(sabor.getText()))
-                        .withAdicionais(adicionaisSelecionados)
-                        .withEstado(Estado.NOVO)
-                        .withTamanho(Tamanho.M) // Padrão
-                        .withData(Date.valueOf(LocalDate.now()))
-                        .build();
-
-                // 3. Persistir
-                pedidoService.register(novoPedido);
-
-                // 4. Atualizar UI e limpar campos
-                atualizarListaPedidos();
-                limparCampos();
-
-                mostrarSucesso("Pedido criado com sucesso!");
-
-            } catch (Exception e) {
-                mostrarErro("Erro ao criar pedido: " + e.getMessage());
-            }
-        }
-
-        private void filtrarPedidos(String criterio) {
-            PedidoService pedidoService = new PedidoServiceImpl(EMSingleton.getInstance());
-            String termo = procurar.getText();
-            List<Pedido> pedidosFiltrados;
-
-            switch (criterio) {
-                case "cliente":
-                    String cpf = new ClienteServiceImpl(EMSingleton.getInstance()).getAll().stream().filter(cliente ->cliente.getNome().equals(termo)).toList().getFirst().getNome();
-                    Cliente clienteCpf = new Cliente();
-                    clienteCpf.setCpf(cpf);
-                    pedidosFiltrados = pedidoService.getByCliente(clienteCpf);
-                    break;
-                case "sabor":
-                    pedidosFiltrados = pedidoService.getAll().stream().filter(pedido -> pedido.getPizza().getPizza().getNome().equals(termo)).toList();
-                    break;
-                default:
-                    pedidosFiltrados = pedidoService.getAll();
+            if (buttonFazerPedidos != null) {
+                buttonFazerPedidos.setOnAction(e -> criarPedido());
             }
 
-            exibirPedidos(pedidosFiltrados);
-        }
+            if (checkTipo != null) {
+                configurarChoiceBoxTipo();
+            }
 
-        // Métodos auxiliares
-        private void atualizarListaPedidos() {
-            PedidoService pedidoService = new PedidoServiceImpl(EMSingleton.getInstance());
-            exibirPedidos(pedidoService.getAll());
-        }
-
-        private void exibirPedidos(List<Pedido> pedidos) {
-            // Implemente a exibição na ScrollPane (ListView ou TableView)
-        }
-
-        private void limparCampos() {
-            cliente.clear();
-            sabor.clear();
-            listaAdicionais.getChildren().forEach(cb -> {
-                if(cb instanceof CheckBox) {
-                    CheckBox check = (CheckBox) cb;
-                    check.setSelected(false);
-                }
-            });
-        }
-
-        private void mostrarSucesso(String mensagem) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Sucesso");
-            alert.setContentText(mensagem);
-            alert.show();
-        }
-
-        private void mostrarErro(String mensagem) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setContentText(mensagem);
-            alert.show();
-        }
-
-        // Métodos para converter texto em objetos (implemente conforme sua lógica)
-        private Cliente parseCliente(String texto) {
-            String cpf = new ClienteServiceImpl(EMSingleton.getInstance()).getAll().stream().filter(cliente ->cliente.getNome().equals(texto)).toList().getFirst().getNome();
-            Cliente clienteCpf = new Cliente();
-            clienteCpf.setCpf(cpf);
-            return new ;
-        }
-
-        private Pizza parsePizza(String texto) {
-            return new PedidoServiceImpl(EMSingleton.getInstance()).getAll().stream().filter(pizza -> {
-                pizza.getPizza().getPizza().getNome().equals(texto);
-            });
+        } catch (IOException e) {
+            mostrarErro("Erro ao carregar componentes: " + e.getMessage());
+        } catch (Exception e) {
+            mostrarErro("Erro na inicialização: " + e.getMessage());
         }
     }
 
-}
+    private void carregarSidebar() throws IOException {
+        FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/br/edu/ufersa/poo/pizzaria/Sidebar.fxml"));
+        Node sidebar = sidebarLoader.load();
+        root.getChildren().add(sidebar);
+        AnchorPane.setTopAnchor(sidebar, 0.0);
+        AnchorPane.setLeftAnchor(sidebar, 0.0);
+        AnchorPane.setBottomAnchor(sidebar, 0.0);
+    }
+
+    private void carregarAdicionais() {
+        if (listaAdicionais == null) {
+            System.err.println("Lista de adicionais não foi injetada corretamente");
+            return;
+        }
+
+        listaAdicionais.getChildren().clear();
+        List<Adicional> adicionais = adicionalService.getAll();
+
+        if (adicionais.isEmpty()) {
+            Label aviso = new Label("Nenhum adicional disponível");
+            aviso.setStyle("-fx-text-fill: gray; -fx-font-style: italic;");
+            listaAdicionais.getChildren().add(aviso);
+            return;
+        }
+
+        adicionais.forEach(adicional -> {
+            CheckBox checkBox = new CheckBox(adicional.getNome());
+            checkBox.setUserData(adicional);
+            listaAdicionais.getChildren().add(checkBox);
+        });
+    }
+
+    private void configurarChoiceBoxTipo() {
+        checkTipo.getItems().addAll("Pequena (P)", "Média (M)", "Grande (G)");
+        checkTipo.setValue("Média (M)");
+    }
+
+    private void configurarMenuFiltro() {
+        MenuItem itemCliente = new MenuItem("Cliente");
+        MenuItem itemSabor = new MenuItem("Sabor");
+        MenuItem itemTodos = new MenuItem("Todos");
+
+        itemCliente.setOnAction(e -> {
+            escolher.setText("Filtrar por: Cliente");
+            filtrarPedidos("cliente");
+        });
+
+        itemSabor.setOnAction(e -> {
+            escolher.setText("Filtrar por: Sabor");
+            filtrarPedidos("sabor");
+        });
+
+        itemTodos.setOnAction(e -> {
+            escolher.setText("Filtrar por");
+            filtrarPedidos("todos");
+        });
+
+        escolher.getItems().clear();
+        escolher.getItems().addAll(itemCliente, itemSabor, itemTodos);
+        escolher.setText("Filtrar por");
+    }
+
+    @FXML
+    private void criarPedido() {
+        try {
+            System.out.println("Botão fazer pedido clicado!"); // Log para depuração
+
+            // 1. Validação dos campos obrigatórios
+            if (cliente.getText() == null || cliente.getText().trim().isEmpty()) {
+                mostrarErro("Por favor, informe o nome do cliente!");
+                cliente.requestFocus();
+                return;
+            }
+
+            if (sabor.getText() == null || sabor.getText().trim().isEmpty()) {
+                mostrarErro("Por favor, informe o sabor da pizza!");
+                sabor.requestFocus();
+                return;
+            }
+
+            // 2. Obter adicionais selecionados
+            List<Adicional> adicionaisSelecionados = obterAdicionaisSelecionados();
+            System.out.println("Adicionais selecionados: " + adicionaisSelecionados.size());
+
+            // 3. Determinar tamanho da pizza
+            Tamanho tamanho = determinarTamanho();
+            System.out.println("Tamanho selecionado: " + tamanho);
+
+            // 4. Buscar cliente no banco de dados
+            Cliente clientePedido = buscarCliente(cliente.getText().trim());
+            System.out.println("Cliente encontrado: " + clientePedido.getNome());
+
+            // 5. Buscar pizza no banco de dados
+            Pizza pizzaPedido = buscarPizza(sabor.getText().trim());
+            System.out.println("Pizza encontrada: " + pizzaPedido.getPizza().getNome());
+
+            // 6. Construir o pedido
+            Pedido novoPedido = pedidoBuilder
+                    .withCliente(clientePedido)
+                    .withPizza(pizzaPedido)
+                    .withAdicionais(adicionaisSelecionados)
+                    .withEstado(Estado.NOVO)
+                    .withTamanho(tamanho)
+                    .withData(Date.valueOf(LocalDate.now()))
+                    .build();
+
+            System.out.println("Pedido construído: " + novoPedido.getId());
+
+            // 7. Registrar no banco de dados
+            pedidoService.register(novoPedido);
+            System.out.println("Pedido registrado com sucesso!");
+
+            // 8. Feedback e limpeza
+            atualizarListaPedidos();
+            limparCampos();
+            mostrarSucesso("Pedido #" + novoPedido.getId() + " criado com sucesso!");
+
+        } catch (IllegalArgumentException e) {
+            mostrarErro(e.getMessage());
+        } catch (Exception e) {
+            mostrarErro("Erro inesperado ao criar pedido: " + e.getMessage());
+            e.printStackTrace(); // Log completo do erro
+        }
+    }
+
+    private Tamanho determinarTamanho() {
+        if (checkTipo == null) return Tamanho.M;
+
+        String selecionado = checkTipo.getValue();
+        if (selecionado.contains("Pequena")) return Tamanho.P;
+        if (selecionado.contains("Grande")) return Tamanho.G;
+        return Tamanho.M;
+    }
+
+    private List<Adicional> obterAdicionaisSelecionados() {
+        if (listaAdicionais == null) return new ArrayList<>();
+
+        return listaAdicionais.getChildren().stream()
+                .filter(node -> node instanceof CheckBox)
+                .map(node -> (CheckBox) node)
+                .filter(CheckBox::isSelected)
+                .map(cb -> (Adicional) cb.getUserData())
+                .collect(Collectors.toList());
+    }
+
+    private void filtrarPedidos(String criterio) {
+        if (procurar == null) return;
+
+        String termo = procurar.getText().trim();
+        List<Pedido> pedidosFiltrados = new ArrayList<>();
+
+        switch (criterio.toLowerCase()) {
+            case "cliente":
+                if (!termo.isEmpty()) {
+                    pedidosFiltrados = pedidoService.getByCliente(buscarCliente(termo));
+                }
+                break;
+            case "sabor":
+                if (!termo.isEmpty()) {
+                    pedidosFiltrados = pedidoService.getAll().stream()
+                            .filter(p -> p.getPizza().getPizza().getNome().equalsIgnoreCase(termo))
+                            .collect(Collectors.toList());
+                }
+                break;
+            default:
+                pedidosFiltrados = pedidoService.getAll();
+        }
+
+        exibirPedidos(pedidosFiltrados.isEmpty() ? pedidoService.getAll() : pedidosFiltrados);
+    }
+
+    private void atualizarListaPedidos() {
+        exibirPedidos(pedidoService.getAll());
+    }
+
+    private void exibirPedidos(List<Pedido> pedidos) {
+        // Implementação sugerida: usar TableView para exibir os pedidos
+        // Esta é uma implementação básica - adapte conforme necessário
+        if (infoPedidos == null) return;
+
+        VBox container = new VBox(5);
+        pedidos.forEach(pedido -> {
+            Label label = new Label(formatarPedido(pedido));
+            label.setStyle("-fx-padding: 5; -fx-border-color: #ddd; -fx-border-width: 0 0 1 0;");
+            container.getChildren().add(label);
+        });
+
+        infoPedidos.setContent(container);
+    }
+
+    private String formatarPedido(Pedido pedido) {
+        return String.format("#%d - %s: %s (%s) - %s - Adicionais: %s",
+                pedido.getId(),
+                pedido.getCliente().getNome(),
+                pedido.getPizza().getPizza().getNome(),
+                pedido.getTamanho(),
+                pedido.getEstado(),
+                pedido.getAdicional().stream()
+                        .map(Adicional::getNome)
+                        .collect(Collectors.joining(", ")));
+    }
+
+    private void limparCampos() {
+        if (cliente != null) cliente.clear();
+        if (sabor != null) sabor.clear();
+        if (listaAdicionais != null) {
+            listaAdicionais.getChildren().forEach(node -> {
+                if (node instanceof CheckBox) {
+                    ((CheckBox) node).setSelected(false);
+                }
+            });
+        }
+        if (procurar != null) procurar.clear();
+    }
+
+    private Cliente buscarCliente(String nome) {
+        return clienteService.getAll().stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(nome))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado: " + nome));
+    }
+
+    private Pizza buscarPizza(String nomeSabor) {
+        return pizzaService.getAll().stream()
+                .filter(p -> p.getPizza().getNome().equalsIgnoreCase(nomeSabor))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Sabor não encontrado: " + nomeSabor));
+    }
+
+    private void mostrarSucesso(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sucesso");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
+
+    private void mostrarErro(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
 }
