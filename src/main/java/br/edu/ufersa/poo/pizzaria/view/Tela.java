@@ -104,6 +104,34 @@ public class Tela extends Application {
         }
     }
 
+    public static void sabores() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/Sabores.fxml"));
+            Pane root = fxmlLoader.load();
+
+            Scene scene = new Scene(root, 800, 600);
+            stage.setTitle("Sabores");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void adicionais() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Tela.class.getResource("/br/edu/ufersa/poo/pizzaria/Adicionais.fxml"));
+            Pane root = fxmlLoader.load();
+
+            Scene scene = new Scene(root, 800, 600);
+            stage.setTitle("Adicionais");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main (String[] ags){
         launch();
     }

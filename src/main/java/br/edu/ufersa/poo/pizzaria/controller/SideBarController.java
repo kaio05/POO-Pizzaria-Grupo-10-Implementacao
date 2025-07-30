@@ -37,13 +37,13 @@ public class SideBarController {
         Tela.clientes();
     }
     @FXML public void nav_sabores() {
-        System.out.println("sabores");
+        Tela.sabores();
     }
     @FXML public void nav_pizzas() {
         System.out.println("pizzas");
     }
     @FXML public void nav_adicionais() {
-        System.out.println("adicionais");
+        Tela.adicionais();
     }
     @FXML public void nav_usuarios() {
         Tela.usuarios();
