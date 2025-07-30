@@ -1,4 +1,5 @@
 package br.edu.ufersa.poo.pizzaria.model.entities;
+import br.edu.ufersa.poo.pizzaria.builder.PizzaBuilderImpl;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -18,6 +19,9 @@ public class Pizza implements Entidade {
     @ManyToOne
     @JoinColumn(name = "clientes_id", nullable = false)
     private Cliente cliente;
+
+    public Pizza(PizzaBuilderImpl pizzaBuilder) {
+    }
 
     public TipoPizza getPizza() {return this.tipo;}
 
