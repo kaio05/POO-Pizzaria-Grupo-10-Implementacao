@@ -31,7 +31,7 @@ public class SideBarController {
         Tela.dashboard();
     }
     @FXML public void nav_pedidos() {
-        System.out.println("pedidos");
+        Tela.pedidos();
     }
     @FXML public void nav_clientes() {
         Tela.clientes();

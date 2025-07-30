@@ -6,44 +6,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fb1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.DashboardPedidos">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fb1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.pizzaria.controller.DashboardPedidosController">
    <children>
-      <AnchorPane layoutX="-2.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="216.0">
-         <children>
-            <Pane layoutY="-8.0" prefHeight="600.0" prefWidth="216.0" style="-fx-background-color: #fff;">
-               <children>
-                  <Button layoutX="51.0" layoutY="494.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Sair" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="usuario1" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="115.0" text="Usuário">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cargo1" alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="135.0" text="Cargo" />
-                  <Button layoutX="18.0" layoutY="175.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_pedidos" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Pedidos" />
-                  <Button layoutX="19.0" layoutY="228.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_clientes" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Clientes" />
-                  <Button layoutX="19.0" layoutY="281.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_sabores" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Sabores" />
-                  <Button layoutX="19.0" layoutY="332.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_pizzas" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Pizzas" />
-                  <Button layoutX="19.0" layoutY="386.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_adicionais" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Adicionais" />
-                  <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="74.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="942.0" style="-fx-background-color: #fb1;">
          <children>
             <AnchorPane layoutX="280.0" layoutY="46.0" prefHeight="498.0" prefWidth="390.0" style="-fx-background-color: fff;">
                <children>
                   <TextField fx:id="procurar" layoutX="21.0" layoutY="22.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: ddd;" text="Buscar" />
-                  <MenuButton fx:id="escolher" layoutX="283.0" layoutY="22.0" mnemonicParsing="false" onAction="#escolherTipoDeProcura" prefHeight="25.0" prefWidth="76.0" text="Tipo">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
                 <AnchorPane layoutX="81.0" layoutY="185.0" minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="255.0" />
                   <ScrollPane fx:id="infoPedidos" layoutX="15.0" layoutY="90.0" prefHeight="380.0" prefWidth="364.0" />
                </children>
@@ -64,48 +33,26 @@
                     <content>
                       <AnchorPane fx:id="adicionais" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <CheckBox fx:id="adicionais" layoutX="17.0" layoutY="28.0" mnemonicParsing="false" text="Adicional" />
+                              <VBox fx:id="listaAdicionais" prefHeight="182.0" prefWidth="202.0" />
                            </children></AnchorPane>
                     </content>
                   </TitledPane>
-                  <Button fx:id="buttonFazerPedido" layoutX="58.0" layoutY="447.0" mnemonicParsing="false" onAction="#fazerPedido" prefHeight="3.0" prefWidth="148.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Fazer Pedido" textFill="WHITE">
+                  <Button fx:id="buttonFazerPedido" layoutX="58.0" layoutY="447.0" mnemonicParsing="false" onAction="#criarPedido" prefHeight="3.0" prefWidth="148.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Fazer Pedido" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                   <TextField fx:id="cliente" layoutX="31.0" layoutY="91.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: fff;" />
                   <TextField fx:id="sabores" layoutX="32.0" layoutY="175.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: fff;" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="800.0">
+               <children>
+                  <ChoiceBox fx:id="checkTipo" layoutX="542.0" layoutY="68.0" prefHeight="25.0" prefWidth="100.0" />
                </children>
             </AnchorPane>
          </children>
       </Pane>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="216.0">
-         <children>
-            <Pane prefHeight="600.0" prefWidth="216.0" style="-fx-background-color: #fff;">
-               <children>
-                  <Button fx:id="buttonSair" layoutX="51.0" layoutY="494.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #f31; -fx-font-size: 16px; -fx-text-fill: #fff; -fx-background-radius: 10px;" text="Sair" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="usuario11" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="115.0" text="Usuário">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cargo11" alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="135.0" text="Cargo" />
-                  <Button fx:id="buttonPedidos" layoutX="18.0" layoutY="175.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_pedidos" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Pedidos" />
-                  <Button fx:id="buttonClientes" layoutX="19.0" layoutY="228.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_clientes" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Clientes" />
-                  <Button fx:id="buttonSabores" layoutX="19.0" layoutY="281.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_sabores" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Sabores" />
-                  <Button fx:id="buttonPizzas" layoutX="19.0" layoutY="332.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_pizzas" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Pizzas" />
-                  <Button fx:id="buttonAdicionais" layoutX="19.0" layoutY="386.0" minHeight="18.0" mnemonicParsing="false" onAction="#nav_adicionais" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #ddd; -fx-font-size: 12px; -fx-padding: 0px; -fx-text-fill: #000;" text="Adicionais" />
-                  <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="74.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/R.jpeg" />
-                     </image></ImageView>
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
    </children>
 </Pane>

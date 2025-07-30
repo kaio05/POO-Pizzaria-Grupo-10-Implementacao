@@ -5,6 +5,7 @@ import br.edu.ufersa.poo.pizzaria.builder.Builder;
 import br.edu.ufersa.poo.pizzaria.model.entities.*;
 import br.edu.ufersa.poo.pizzaria.model.services.PedidoService;
 import br.edu.ufersa.poo.pizzaria.model.services.PedidoServiceImpl;
+import br.edu.ufersa.poo.pizzaria.utils.EMSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,7 +28,7 @@ public class PedidoRegisterController {
 
     public void initialize() {
         this.pedidoBuilder = new PedidoBuilderImpl();
-        this.pedidoService = new PedidoServiceImpl(em);
+        this.pedidoService = new PedidoServiceImpl(EMSingleton.getInstance());
 
         configurarEventos();
     }
@@ -41,7 +42,7 @@ public class PedidoRegisterController {
         this.pedidoAtual = pedido;
 
         nome.setText(pedido.getCliente().getNome());
-        sabor.setText(pedido.getPizza().getSabor());
+        sabor.setText(pedido.getPizza().getPizza().getNome());
         adicional.setText(formatarAdicionais(pedido.getAdicional()));
     }
 
