@@ -25,7 +25,7 @@ public class DashboardPedidosController {
     @FXML private TextField cliente;
     @FXML private TextField sabor;
     @FXML private TitledPane pedidoAdicionais;
-    @FXML private Button buttonFazerPedidos;
+    @FXML private Button buttonFazerPedido;
     @FXML private TextField procurar;
     @FXML private MenuButton escolher;
     @FXML private ScrollPane infoPedidos;
@@ -54,8 +54,8 @@ public class DashboardPedidosController {
                 configurarMenuFiltro();
             }
 
-            if (buttonFazerPedidos != null) {
-                buttonFazerPedidos.setOnAction(e -> criarPedido());
+            if (buttonFazerPedido != null) {
+                buttonFazerPedido.setOnAction(e -> criarPedido());
             }
 
             if (checkTipo != null) {
