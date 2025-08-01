@@ -25,6 +25,7 @@
       </Label>
       <Label fx:id="sabor" layoutX="20.0" layoutY="42.0" text="Sabor" />
       <Label fx:id="adicional" layoutX="20.0" layoutY="61.0" text="Adicional" />
-      <Label fx:id="adicional1" layoutX="20.0" layoutY="78.0" text="Estado" />
+      <Label fx:id="estado" layoutX="148.0" layoutY="61.0" text="Estado" />
+      <Label fx:id="tamanho" layoutX="148.0" layoutY="42.0" text="Tamanho" />
    </children>
 </Pane>
